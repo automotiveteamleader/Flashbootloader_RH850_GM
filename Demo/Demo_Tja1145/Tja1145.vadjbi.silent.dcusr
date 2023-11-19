@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Settings>
+    <Settings Name="CFG5_GUI_SETTING">
+        <Settings Name="NumberFormatOverride"/>
+        <Settings Name="com.vector.cfg.gui.app.views.validation.validationview.hideack">
+            <Setting Value="false" Name="buttonstate"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.AUTOSAR.EcucDefs.EcuM.EcuMConfiguration">
+            <Setting Value="0,1," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:20,1:146," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.AUTOSAR.EcucDefs.EcuM.EcuMConfiguration.EcuMCommonConfiguration.EcuMWakeupSource">
+            <Setting Value="0,1,2,3,4,5,6," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:23,1:151,2:141,3:126,4:154,5:132,6:159," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.AUTOSAR.EcucDefs.Spi.SpiDriver">
+            <Setting Value="0,1,2,3,4," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:20,1:89,2:106,3:80,4:113," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.AUTOSAR.EcucDefs.Spi.SpiDriver.SpiChannel">
+            <Setting Value="0,1,2,3,4,5,6,7,8," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:23,1:111,2:94,3:110,4:96,5:102,6:115,7:96,8:107," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.AUTOSAR.EcucDefs.Spi.SpiDriver.SpiExternalDevice">
+            <Setting Value="0,1,2,3,4,5,6,7,8,9,10," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:23,1:134,2:84,3:100,4:93,5:101,6:117,7:88,8:80,9:146,10:106," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.AUTOSAR.EcucDefs.Spi.SpiDriver.SpiJob">
+            <Setting Value="0,1,2,3,4,5,6," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:23,1:85,2:138,3:152,4:144,5:68,6:96," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.AUTOSAR.EcucDefs.Spi.SpiDriver.SpiJob.SpiChannelList">
+            <Setting Value="0,1,2,3," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:23,1:120,2:147,3:112," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.AUTOSAR.EcucDefs.Spi.SpiDriver.SpiSequence">
+            <Setting Value="0,1,2,3,4,5," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:23,1:118,2:156,3:145,4:101,5:121," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.MICROSAR.CanTrcv_Tja1145.CanTrcv.CanTrcvConfigSet.CanTrcvChannel">
+            <Setting Value="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:23,1:130,2:94,3:110,4:157,5:110,6:105,7:117,8:120,9:197,10:147,11:160,12:173,13:147,14:139," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.MICROSAR.CanTrcv_Tja1145.CanTrcv.CanTrcvConfigSet.CanTrcvChannel.CanTrcvAccess.CanTrcvSpiSequence.CanTrcvSpiSequenceAccess">
+            <Setting Value="0,1,2,3,4," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:23,1:184,2:164,3:157,4:142," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.MICROSAR.CanTrcv_Tja1145.CanTrcv.CanTrcvConfigSet.CanTrcvChannel.CanTrcvPartialNetwork.CanTrcvPnFrameDataMaskSpec">
+            <Setting Value="0,1,2,3," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:20,1:210,2:145,3:176," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.MICROSAR.EcuC.EcucGeneral.BswInitialization.InitFunction">
+            <Setting Value="0,1,2,3,4,5,6,7,8," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:20,1:201,2:143,3:210,4:195,5:201,6:144,7:116,8:98," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.MICROSAR.EcuM.EcuMConfiguration.EcuMCommonConfiguration.EcuMSleepMode">
+            <Setting Value="0,1,2,3,4,5," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:20,1:131,2:112,3:180,4:147,5:150," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.MICROSAR.EcuM.EcuMConfiguration.EcuMCommonConfiguration.EcuMWakeupSource">
+            <Setting Value="0,1,2,3,4,5,6,7,8," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:20,1:225,2:180,3:176,4:126,5:154,6:132,7:159,8:156," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.MICROSAR.EcuM.EcuMConfiguration.EcuMFlexConfiguration.EcuMResetMode">
+            <Setting Value="0,1,2," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:20,1:150,2:112," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.MICROSAR.EcuM.EcuMConfiguration.EcuMFlexConfiguration.EcuMShutdownCause">
+            <Setting Value="0,1,2," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:20,1:169,2:139," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.MICROSAR.EcuM.EcuMConfiguration.EcuMFlexConfiguration.EcuMShutdownTarget">
+            <Setting Value="0,1,2," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:20,1:160,2:141," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
+        <Settings Name="com.vector.cfg.gui.pse.assistants.moduledefinition.ModuleDefListPart">
+            <Setting Value="0,1,2," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:78,1:222,2:147," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="0" Name="nattable.sortIndexes"/>
+        </Settings>
+    </Settings>
+    <Settings Name="com.vector.cfg.consistency.internal.executer.BackgroundValidationExecuter">
+        <Setting Value="rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVz&#xA;aG9sZHhwP0AAAAAAABh3CAAAACAAAAASdABWY29tLnZlY3Rvci5jZmcuY29uc2lzdGVuY3kuYmFz&#xA;aWNydWxlcy5pbnRlcm5hbC5tdWx0aXBsaWNpdHkuTXVsdGlwbGljaXR5Q2hlY2tDb250YWluZXJz&#xA;cgAOamF2YS5sYW5nLkxvbmc7i+SQzI8j3wIAAUoABXZhbHVleHIAEGphdmEubGFuZy5OdW1iZXKG&#xA;rJUdC5TgiwIAAHhwAAAAAAEAAAB0AEVjb20udmVjdG9yLmNmZy5nZW4uRWN1Q19Bc3JFY3VDLnZh&#xA;bGlkYXRpb24uUGR1TGVuZ3RoVHlwZUVudW1WYWxpZGF0b3JzcQB+AAMAAAAAAQAAAHQAPGNvbS52&#xA;ZWN0b3IuY2ZnLmRvbS5iYXNlLnVpLmRldC52YWxpZGF0aW9uLkRldEFjdGl2YXRpb25DaGVja3Nx&#xA;AH4AAwAAAAAGAAAAdABAY29tLnZlY3Rvci5jZmcuY29uc2lzdGVuY3kuYmFzaWNydWxlcy5pbnRl&#xA;cm5hbC5Nb2R1bGVWYXJpYW50RW51bXNxAH4AAwAAAAABAAAAdABZY29tLnZlY3Rvci5jZmcuZ2Vu&#xA;LkRydlRyYW5zX19iYXNlQ2FueEFzci52YWxpZGF0aW9uLkNhblRyY3ZXYWtldXBTb3VyY2VTcGVj&#xA;aWZpZWRWYWxpZGF0b3JzcQB+AAMAAAAAAQAAAHQASGNvbS52ZWN0b3IuY2ZnLm1vZGVsLnNlcnZp&#xA;Y2VzLmNvbS5lY3VjLmludGVybmFsLkVjdWNCc3dJbml0RmN0VmFsaWRhdGlvbnNxAH4AAwAAAAAF&#xA;AAAAdABcY29tLnZlY3Rvci5jZmcuZ2VuLlN5c1NlcnZpY2VfQXNyNEVjdU0udmFsaWRhdGlvbi5j&#xA;b21tb25WYWxpZGF0aW9ucy5FY3VNT3NSZXNvdXJjZVZhbGlkYXRpb25zcQB+AAMAAAAAAgAAAHQA&#xA;Q2NvbS52ZWN0b3IuY2ZnLm1vZGVsLnN3Y3RlbXBsYXRlcy5pbnRlcm5hbC52YWxpZGF0aW9uLlN3&#xA;Y1ZhbGlkYXRpb25zcQB+AAMAAAAAOQAAAHQARWNvbS52ZWN0b3IuY2ZnLmdlbi5JbF9Bc3JDb21D&#xA;Zmc1LnZhbGlkYXRpb24uQ29tRWN1Q1BkdUlkVHlwZVZhbGlkYXRvcnNxAH4AAwAAAAABAAAAdABZ&#xA;Y29tLnZlY3Rvci5jZmcuZ2VuLlN5c1NlcnZpY2VfQXNyNEVjdU0udmFsaWRhdGlvbi5jb21tb25W&#xA;YWxpZGF0aW9ucy5FY3VNSGFuZGxlSWRWYWxpZGF0b3JzcQB+AAMAAAAAHAAAAHQAVWNvbS52ZWN0&#xA;b3IuY2ZnLmdlbi5EcnZUcmFuc19fYmFzZUNhbnhBc3IudmFsaWRhdGlvbi5DYW5UcmN2Q2hhbm5l&#xA;bFJlZmVyZW5jZWRWYWxpZGF0b3JzcQB+AAMAAAAACwAAAHQANWNvbS52ZWN0b3IuY2ZnLmRvbS5p&#xA;by51aS52YWxpZGF0aW9ucy5TcGkuU3BpQ2hhbm5lbElkc3EAfgADAAAAAAEAAAB0AFFjb20udmVj&#xA;dG9yLmNmZy5nZW4uRHJ2VHJhbnNfX2Jhc2VDYW54QXNyLnZhbGlkYXRpb24uQ2FuVHJjdlByb2RF&#xA;cnJEZXRlY3RWYWxpZGF0b3JzcQB+AAMAAAAAAQAAAHQATmNvbS52ZWN0b3IuY2ZnLm1vZGVsLnNl&#xA;cnZpY2VzLm1lYXN1cmVjYWxpYi5ydG0uaW50ZXJuYWwuTWVhc3VyZVBvaW50VmFsaWRhdGlvbnNx&#xA;AH4AAwAAAAAFAAAAdABTY29tLnZlY3Rvci5jZmcuZ2VuLkRydlRyYW5zX19iYXNlQ2FueEFzci52&#xA;YWxpZGF0aW9uLkNhblRyY3ZQbkNvbmZpZ3VyYXRpb25WYWxpZGF0b3JzcQB+AAMAAAAACAAAAHQA&#xA;YmNvbS52ZWN0b3IuY2ZnLm1vZGVsLnNlcnZpY2VzLmludGVybmFsLmJzd2ludGJlaGF2aW9yLnN5&#xA;bmNocm9uaXphdGlvbi5Cc3dJbnRlcm5hbEJlaGF2aW9yVmFsaWRhdG9yc3EAfgADAAAAAAMAAAB0&#xA;AFZjb20udmVjdG9yLmNmZy5jb25zaXN0ZW5jeS5iYXNpY3J1bGVzLmludGVybmFsLm11bHRpcGxp&#xA;Y2l0eS5NdWx0aXBsaWNpdHlDaGVja1BhcmFtZXRlcnNxAH4AAwAAAAABAAAAdABNY29tLnZlY3Rv&#xA;ci5jZmcuY29uc2lzdGVuY3kuYmFzaWNydWxlcy5pbnRlcm5hbC5yZWZlcmVuY2VjaGVjay5SZWZl&#xA;cmVuY2VDaGVjazJzcQB+AAMAAAAACwAAAHg=" Name="ValidationRuleExecutionTimes"/>
+    </Settings>
+</Settings>

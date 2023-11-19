@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AUTOSAR xmlns="http://autosar.org/3.0.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<TOP-LEVEL-PACKAGES>
+		<AR-PACKAGE UUID="1cfec670-caf5-4b3d-bb14-77e6b4206eda">
+			<SHORT-NAME>MICROSAR</SHORT-NAME>
+			<ELEMENTS>
+				<BSW-IMPLEMENTATION UUID="0a3f6594-0170-42dd-b44e-6ccfd419c229">
+					<SHORT-NAME>SysService_SecModHis_Impl</SHORT-NAME>
+					<CODE-GENERATOR>cMICROSAR,GENy</CODE-GENERATOR>
+					<PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+					<AR-MAJOR-VERSION>3</AR-MAJOR-VERSION>
+					<AR-MINOR-VERSION>0</AR-MINOR-VERSION>
+					<AR-PATCH-VERSION>1</AR-PATCH-VERSION>
+					<VENDOR-SPECIFIC-MODULE-DEF-REF DEST="MODULE-DEF">/MICROSAR/SysService_SecModHis_Def</VENDOR-SPECIFIC-MODULE-DEF-REF>
+				</BSW-IMPLEMENTATION>
+				<MODULE-DEF UUID="5c427bda-80dc-487c-aafb-94f8b4e8b5af">
+					<SHORT-NAME>SysService_SecModHis_Def</SHORT-NAME>
+					<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+					<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+					<CONTAINERS>
+						<PARAM-CONF-CONTAINER-DEF UUID="5369c325-9ed0-4693-9b19-c939a761139f">
+							<SHORT-NAME>General</SHORT-NAME>
+							<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+							<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+							<PARAMETERS>
+								<!--Category:-->
+								<STRING-PARAM-DEF UUID="a512def7-b7ed-4221-8cd2-e7e11511cbec">
+									<SHORT-NAME>SmhUserConfigFile</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">If a file path will be specified, the file is read and its contents are put at the end of the CAN config file.</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+								</STRING-PARAM-DEF>
+								<!--Category: SysService_SecModHis-->
+								<INTEGER-PARAM-DEF UUID="44c34471-29cf-4681-97ba-970f07918f89">
+									<SHORT-NAME>SmhKeyConstant</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Use this setting to configure the key constant for the standard seed/key security access algorithm. This setting must correspond to setting in the diagnostic tool/CANflash tool.</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>0</DEFAULT-VALUE>
+								</INTEGER-PARAM-DEF>
+								<INTEGER-PARAM-DEF UUID="895d7d3a-84b6-456a-a32e-f5aff64f184b">
+									<SHORT-NAME>SmhKeyTimeout</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Used for configuring the timeout for a valid key. This timeout is active after the FBL has sent the seed values to the tester. If the security key is not received within the configured time (in ms), it will not be accepted. After the specifed time (in ms), the security key is set to invalid. Refer to the OEM reference manual for further details or deviations.</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>100</DEFAULT-VALUE>
+								</INTEGER-PARAM-DEF>
+								<INTEGER-PARAM-DEF UUID="5141e44c-7eaa-4e63-8a16-c91da19f50ae">
+									<SHORT-NAME>SmhCallCycle</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">The security module is cyclically called by the Bootloader, e.g. to check the key timeout. Enter the call cycle of the security module here (in ms).</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>10</DEFAULT-VALUE>
+								</INTEGER-PARAM-DEF>
+								<INTEGER-PARAM-DEF UUID="3759b129-e3ca-4e50-92d7-b10578eeef54">
+									<SHORT-NAME>SmhMemoryAccessMode</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Type of memory access of the security module. Normally set to Memory Access - set this to File Access, if you have a file system on your ECU.</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>0</DEFAULT-VALUE>
+								</INTEGER-PARAM-DEF>
+								<INTEGER-PARAM-DEF UUID="a3cbf521-c4b2-4cf2-b2db-968d13308d5f">
+									<SHORT-NAME>SmhOperationMode</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Use this setting to enable/disable debug code in the Security Module. When the integration is done, set this switch to Production.</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>1</DEFAULT-VALUE>
+								</INTEGER-PARAM-DEF>
+								<INTEGER-PARAM-DEF UUID="dc2f1d86-7eb6-4964-b55d-cfbe95704849">
+									<SHORT-NAME>SmhOptimization</SHORT-NAME>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>0</DEFAULT-VALUE>
+								</INTEGER-PARAM-DEF>
+								<BOOLEAN-PARAM-DEF UUID="eb1fe70d-9bd7-4775-b37a-21fb35ddc715">
+									<SHORT-NAME>SmhCRCTotal</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">If enabled the security module calculates a CRC over an entire block during the verification process. This value can be used later on to verify the consistency of this flashblock.</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>false</DEFAULT-VALUE>
+								</BOOLEAN-PARAM-DEF>
+								<INTEGER-PARAM-DEF UUID="81ba1067-c5ac-4062-b819-2b573e98dfda">
+									<SHORT-NAME>SmhHashAlgorithm</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Select the hash function for the security classes C and CCC</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>0</DEFAULT-VALUE>
+								</INTEGER-PARAM-DEF>
+								<INTEGER-PARAM-DEF UUID="c4a0f867-089f-4ffa-8b23-37958f9bd3e8">
+									<SHORT-NAME>SmhReadBufferSize</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Defines the number of bytes to be processed per block operation in the hash function</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>64</DEFAULT-VALUE>
+								</INTEGER-PARAM-DEF>
+								<BOOLEAN-PARAM-DEF UUID="0908c13e-3e56-4fbe-ae2f-29e02f1e7003">
+									<SHORT-NAME>SmhDecryption</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Enables or disables the AES-decryption functionality of the security module.</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>false</DEFAULT-VALUE>
+								</BOOLEAN-PARAM-DEF>
+								<BOOLEAN-PARAM-DEF UUID="87d7d440-5166-4381-ada9-410f6a55cca0">
+									<SHORT-NAME>SmhIncludeAddressAndLengthInSignature</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Add the address and length information for every segment to the signature calculation.</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>false</DEFAULT-VALUE>
+								</BOOLEAN-PARAM-DEF>
+								<INTEGER-PARAM-DEF UUID="305eb432-29a2-4c6a-9f96-e4c5f089a327">
+									<SHORT-NAME>SmhSignatureOffset</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Specifies the offset to the signature within the verify input data stream</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>0</DEFAULT-VALUE>
+								</INTEGER-PARAM-DEF>
+								<INTEGER-PARAM-DEF UUID="e2bf28be-6cc0-4908-9f99-7c7b1faec02d">
+									<SHORT-NAME>SmhCRCOffset</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Specifies the offset to the CRC within the verify input data stream</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>0</DEFAULT-VALUE>
+								</INTEGER-PARAM-DEF>
+								<BOOLEAN-PARAM-DEF UUID="7d36b679-4e52-4e6f-9eba-58727ed9e68d">
+									<SHORT-NAME>SmhSecurityClassDDD</SHORT-NAME>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>false</DEFAULT-VALUE>
+								</BOOLEAN-PARAM-DEF>
+								<BOOLEAN-PARAM-DEF UUID="6d75e576-4048-4ba8-a023-bcd6670bf083">
+									<SHORT-NAME>SmhCRCWritten</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">If enabled the security module calculates a CRC over the written data during the verification process. The resulting CRC is compared with the given reference value.</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>false</DEFAULT-VALUE>
+								</BOOLEAN-PARAM-DEF>
+								<!--Category: File Selection-->
+								<INTEGER-PARAM-DEF UUID="8af9466a-c8b9-4816-ad7a-dc20c2a07303">
+									<SHORT-NAME>SmhFileType</SHORT-NAME>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>0</DEFAULT-VALUE>
+								</INTEGER-PARAM-DEF>
+								<STRING-PARAM-DEF UUID="8fb47190-ade0-4c90-8c2d-03c661be6337">
+									<SHORT-NAME>SmhAuthenticityFile</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">If a file path is specified here, the file is read and its contents are put into the file secmpar.c. If security class C or CCC is selected, you'll have to specifiy the path to the key file The file must contain a HEX data stream in the HIS-format in the very first line.</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+								</STRING-PARAM-DEF>
+								<STRING-PARAM-DEF UUID="7a94449b-2a6f-4ace-91ac-e08210e48cfd">
+									<SHORT-NAME>SmhINIFile</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Specify the path to an INI-file that contains one or more key information for the security classes C, CCC or AAA.</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+								</STRING-PARAM-DEF>
+								<INTEGER-PARAM-DEF UUID="08814499-7b91-4c3e-8d35-5cbb8b177049">
+									<SHORT-NAME>SmhSecurityClass</SHORT-NAME>
+									<DESC>
+										<L-2 L="EN">Specifies the security class of your ECU. The type of the security class is specified by the ECU responsible at the OEM.</L-2>
+									</DESC>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>0</DEFAULT-VALUE>
+								</INTEGER-PARAM-DEF>
+								<!--Category: Keys from INI-File-->
+								<!--
+								<BOOLEAN-PARAM-DEF UUID="01c70bc2-94fa-4d19-9d1a-873ff545db4c">
+									<SHORT-NAME>SmhIniKeySelected</SHORT-NAME>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+									<DEFAULT-VALUE>false</DEFAULT-VALUE>
+								</BOOLEAN-PARAM-DEF>
+								<STRING-PARAM-DEF UUID="3fe144ac-2663-4847-9124-fbae982cd5e0">
+									<SHORT-NAME>SmhIniKeyDescription</SHORT-NAME>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+								</STRING-PARAM-DEF>
+								<STRING-PARAM-DEF UUID="a4eaae00-d9ce-4424-aa5d-4a7e80ea698b">
+									<SHORT-NAME>SmhIniKeySecurityClass</SHORT-NAME>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+								</STRING-PARAM-DEF>
+								<STRING-PARAM-DEF UUID="4367c4ca-a32e-4107-9328-ef9b40f4ceb2">
+									<SHORT-NAME>SmhIniKeyECU</SHORT-NAME>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+								</STRING-PARAM-DEF>
+								<STRING-PARAM-DEF UUID="6b79a841-528c-445e-8505-01f544c99a36">
+									<SHORT-NAME>SmhIniKeyCreationDate</SHORT-NAME>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+								</STRING-PARAM-DEF>
+								<STRING-PARAM-DEF UUID="09e89f0f-4146-4b31-a6d4-2dd58f5fb4a1">
+									<SHORT-NAME>SmhIniKeyPurpose</SHORT-NAME>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+								</STRING-PARAM-DEF>
+								<STRING-PARAM-DEF UUID="a4e20bd0-120f-4a0e-8107-2b68ada01547">
+									<SHORT-NAME>SmhIniKeyEncodedKey</SHORT-NAME>
+									<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+									<UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+									<SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+								</STRING-PARAM-DEF>
+-->
+							</PARAMETERS>
+						</PARAM-CONF-CONTAINER-DEF>
+					</CONTAINERS>
+				</MODULE-DEF>
+			</ELEMENTS>
+		</AR-PACKAGE>
+	</TOP-LEVEL-PACKAGES>
+</AUTOSAR>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by Vector Employee (Vector Informatik GmbH) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<!-- XML Schema 2016-08-12 Awh-->
+	<!-- with XmlGrid.net Free Online Service http://xmlgrid.net -->
+	<xs:element name="GmProject">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="HeaderVersion" type="xs:double"/>
+				<xs:element name="SignedHeaderInfo">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="image" type="xs:string"/>
+							<xs:element name="EcuId" type="xs:int"/>
+							<xs:element name="EcuName" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="AppHeaderInfo">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="HeaderAddress">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:pattern value="0x[0-9A-Fa-f]+|[0-9]+"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ModuleId">
+								<xs:simpleType>
+									<xs:restriction base="xs:int">
+										<xs:enumeration value="1"/>
+										<xs:enumeration value="21"/>
+										<xs:enumeration value="31"/>
+										<xs:enumeration value="41"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="BCID">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:pattern value="0x[0-9A-Fa-f]+|[0-9]+"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="NBID">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:pattern value="([1-9][0-9]?[0-9]?[0-9]?)?(0)?"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="DLS" type="xs:string"/>
+							<xs:element name="PartNumber">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:pattern value="0x[0-9A-Fa-f]+|[0-9]+"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="AsciiPartNumber" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:pattern value="0x[0-9A-Fa-f]+|[0-9]+"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Partitions">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Partition" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Region" minOccurs="0" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:attribute name="start">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:pattern value="0x[0-9A-Fa-f]+|[0-9]+"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="length">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:pattern value="0x[0-9A-Fa-f]+|[0-9]+"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="CalFiles" minOccurs="0" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Image" minOccurs="0" maxOccurs="unbounded">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute name="BaseAddress">
+																					<xs:simpleType>
+																						<xs:restriction base="xs:string">
+																							<xs:pattern value="0x[0-9A-Fa-f]+|[0-9]+"/>
+																						</xs:restriction>
+																					</xs:simpleType>
+																				</xs:attribute>
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="NumberOfCalFiles" type="xs:int"/>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="NumberOfRegions" type="xs:int"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="NumberOfPartitions" type="xs:int"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="name" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="CalHeaderInfo" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ModuleId" type="xs:int"/>
+							<xs:element name="CCID">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:pattern value="0x[0-9A-Fa-f]+|[0-9]+"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="DLS" type="xs:string"/>
+							<xs:element name="PartNumber">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:pattern value="0x[0-9A-Fa-f]+|[0-9]+"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="Name" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="Name" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

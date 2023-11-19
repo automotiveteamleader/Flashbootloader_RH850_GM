@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CANbeddedVersionInfo Version="2.6">
+    <Properties>
+        <DeliveryDate>2017-07-28</DeliveryDate>
+        <CreatedDate>2017-07-27</CreatedDate>
+        <CBD>CBD1500635</CBD>
+        <SalesSite>VA</SalesSite>
+        <IntegrationSite>VA</IntegrationSite>
+        <SIP>06.04.03</SIP>
+        <Release>03</Release>
+        <ProjectNumber>5021516</ProjectNumber>
+        <Eval>false</Eval>
+        <ErrataContacts>
+            <ErrataContact>
+                <Firstname>Lucas</Firstname>
+                <Surname>Wendling</Surname>
+                <Email>Lucas.Wendling@nexteer.com</Email>
+            </ErrataContact>
+            <ErrataContact>
+                <Firstname>Lonnie</Firstname>
+                <Surname>Newton</Surname>
+                <Email>lonnie.newton@nexteer.com</Email>
+            </ErrataContact>
+        </ErrataContacts>
+        <CustomerContact>
+            <Firstname>VA</Firstname>
+            <Surname>Bootloaders Support</Surname>
+            <Email>fblsupport@us.vector.com</Email>
+        </CustomerContact>
+        <Customer>Nexteer Automotive Corporation
+Package: FBL Gm SLP6
+Micro: Renesas RH850 P1M R7F701363
+Compiler: Green Hills 2015.1.7</Customer>
+        <DeliveryType>Explicit purchase order delivery</DeliveryType>
+        <ReleaseType>Production (QM serial production release)</ReleaseType>
+        <DeliveryReason>5021516</DeliveryReason>
+        <OEM>Gm</OEM>
+        <SLP>FBL Gm SLP6</SLP>
+        <UseCases/>
+        <Controller>Rh850</Controller>
+        <CanCell>Rscan</CanCell>
+        <Compiler>GreenHills</Compiler>
+        <DeliveryPath>\\vadetfs2\Project\Delivery\CBD15x\CBD1500635\D03</DeliveryPath>
+        <TestedDerivative>R7F701363</TestedDerivative>
+        <OrderedDerivative>Renesas RH850 P1M R7F701363</OrderedDerivative>
+        <NDA>false</NDA>
+        <ShowBetaDisclaimer>false</ShowBetaDisclaimer>
+    </Properties>
+    <ComponentCheck>
+        <Component Version="3.59.00" ScanPattern="Common_Vdef" Project="Common_Vdef" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>v_def.h</RelativeFileSpec>
+        </Component>
+        <Component Version="2.00.00" ScanPattern="DrvFls_Rh850F1xRen01HisSub" Project="DrvFls_Rh850F1xRen01HisSub" Delivered="true" Component="Implementation"/>
+        <Component Version="1.02.02" ScanPattern="DrvTrans_Tja1145CanspiFbl" Project="DrvTrans_Tja1145CanspiFbl" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>_Spi.h;_fbl_can_trcv_tja1145_cfg.h;fbl_can_trcv_tja1145.h;fbl_can_trcv_tja1145_inc.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.05.11" ScanPattern="FBL_Gm_SLP6" Project="FBL_Gm_SLP6" Delivered="true" Component="Preconfig"/>
+        <Component Version="4.05.00" ScanPattern="FblAsrStubs" Project="FblAsrStubs" Delivered="true" Component="Impl_BswStub">
+            <RelativeFileSpec>BswM_CanSM.h;BswM_ComM.h;BswM_FrSM.h;CanIf.h;ComM.h;ComM_BusSM.h;ComM_Types.h;Dem.h;Det.h;DoIP.h;DoIP_Cbk.h;EcuM.h;EcuM_Cbk.h;FblAsrStubs.h;MemIf.h;MemIf_Types.h;Os.h;Rte.h;Rte_ComM.h;Rte_ComM_Type.h;Rte_Type.h;SchM_Can.h;SchM_CanIf.h;SchM_CanSM.h;SchM_CanTp.h;SchM_CanTrcv_30_Sbc.h;SchM_CanTrcv_30_Tja1145.h;SchM_ComM.h;SchM_DoIP.h;SchM_Eth.h;SchM_EthIf.h;SchM_EthSm.h;SchM_EthSwt_30_Bcm8953x.h;SchM_EthSwt_30_Sja1105.h;SchM_EthTSyn.h;SchM_EthTrcv_30_Bcm89811.h;SchM_EthTrcv_30_Ethmii.h;SchM_EthTrcv_30_Tja1100.h;SchM_Eth_30_Tricore.h;SchM_Eth_30_Ultrascale.h;SchM_Fee.h;SchM_Fls.h;SchM_Fr.h;SchM_FrIf.h;SchM_FrNm.h;SchM_FrSM.h;SchM_FrTp.h;SchM_FrTrcv.h;SchM_Fr_Type.h;SchM_Nm.h;SchM_PduR.h;SchM_Sbc_30_Tle9278.h;SchM_SoAd.h;SchM_TcpIp.h;SchM_Wdg_30_Sbc.h;SchM_Xcp.h;WdgIf_Types.h</RelativeFileSpec>
+        </Component>
+        <Component Version="4.00.01" ScanPattern="FblAsrStubs" Project="FblAsrStubs" Delivered="true" Component="Impl_FrTrcvStub">
+            <RelativeFileSpec>FrTrcv.h;FrTrcv_Cbk.h;_FrTrcv_Cfg.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.05.00" ScanPattern="FblCan_14230_Gm" Project="FblCan_14230_Gm" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>FblCan_14230_Gm.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="4.00.00" ScanPattern="FblDef" Project="FblDef" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>fbl_assert.h;fbl_def.h</RelativeFileSpec>
+        </Component>
+        <Component Version="2.06.02" ScanPattern="FblDiag_14229_Core" Project="FblDiag_14229_Core" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>fbl_diag.h;fbl_diag_core.h</RelativeFileSpec>
+        </Component>
+        <Component Version="4.02.01" ScanPattern="FblDiag_14229_Gm" Project="FblDiag_14229_Gm" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>fbl_assert_oem.h;fbl_diag_oem.h</RelativeFileSpec>
+        </Component>
+        <Component Version="3.02.00" ScanPattern="FblDiag_SecHdr_Gm" Project="FblDiag_SecHdr_Gm" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>fbl_hdr.h;fbl_mem_oem.h;fbl_nbid.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.05.00" ScanPattern="FblDrvCan_Rh850RscanCrx" Project="FblDrvCan_Rh850RscanCrx" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>FblDrvCan_Rh850RscanCrx.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="1.06.00" ScanPattern="FblDrvCan_Rh850RscanCrx" Project="FblDrvCan_Rh850RscanCrx" Delivered="true" Component="GenTool_Geny_Preconfig"/>
+        <Component Version="1.20.00" ScanPattern="FblDrvCan_Rh850RscanCrx" Project="FblDrvCan_Rh850RscanCrx" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>fbl_hw.h;fbl_sfr.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.06.00" ScanPattern="FblDrvFlash_Rh850Rv40His" Project="FblDrvFlash_Rh850Rv40His" Delivered="true" Component="Impl_Main">
+            <RelativeFileSpec>flashdrv.h</RelativeFileSpec>
+        </Component>
+        <Component Version="2.01.00" ScanPattern="FblDrvSpi_RenesasCsih" Project="FblDrvSpi_RenesasCsih" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>_fbl_spi_renesas_csih_cfg.h;fbl_spi_renesas_csih.h;fbl_spi_renesas_csih_inc.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.00.01" ScanPattern="FblDrvSpi_VectorIf" Project="FblDrvSpi_VectorIf" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>_fbl_spi_if_cfg.h;fbl_spi_if.h</RelativeFileSpec>
+        </Component>
+        <Component Version="3.06.01" ScanPattern="FblInc" Project="FblInc" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>_fbl_inc.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.77.01" ScanPattern="FblKbApi" Project="FblKbApi" Delivered="true" Component="Implementation"/>
+        <Component Version="5.05.01" ScanPattern="FblKbApi_FrameDiag_Gm" Project="FblKbApi_FrameDiag_Gm" Delivered="true" Component="Implementation"/>
+        <Component Version="5.02.01" ScanPattern="FblKbApi_FrameNv_Gm" Project="FblKbApi_FrameNv_Gm" Delivered="true" Component="Implementation"/>
+        <Component Version="3.10.00" ScanPattern="FblKbApi_FrameWd" Project="FblKbApi_FrameWd" Delivered="true" Component="Implementation"/>
+        <Component Version="5.06.02" ScanPattern="FblKbApi_Frame_Gm" Project="FblKbApi_Frame_Gm" Delivered="true" Component="Implementation"/>
+        <Component Version="5.14.05" ScanPattern="FblKbApi_Gm" Project="FblKbApi_Gm" Delivered="true" Component="Implementation"/>
+        <Component Version="1.04.00" ScanPattern="FblKbApi_Rh850Rscan" Project="FblKbApi_Rh850Rscan" Delivered="true" Component="Implementation"/>
+        <Component Version="1.02.01" ScanPattern="FblKbMain_Rh850" Project="FblKbMain_Rh850" Delivered="true" Component="Implementation"/>
+        <Component Version="4.01.00" ScanPattern="FblLib_Mem" Project="FblLib_Mem" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>fbl_mem.h</RelativeFileSpec>
+        </Component>
+        <Component Version="3.01.00" ScanPattern="FblMain" Project="FblMain" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>fbl_main.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.46.01" ScanPattern="FblMio" Project="FblMio" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>fbl_mio.h;iotypes.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.05.00" ScanPattern="FblTool_FlashTemplateUds_Gm_Slp6" Project="FblTool_FlashTemplateUds_Gm_Slp6" Delivered="true" Component="Implementation"/>
+        <Component Version="2.02.01" ScanPattern="FblTool_Hexeditor_Hexview" Project="FblTool_Hexeditor_Hexview" Delivered="true" Component="Application_Dll">
+            <RelativeFileSpec>expdat.h;expdatproc.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="1.10.04" ScanPattern="FblTool_Hexeditor_Hexview" Project="FblTool_Hexeditor_Hexview" Delivered="true" Component="Application_Exe">
+            <RelativeFileSpec>Disclaimstatic.dll;InfoWindow2.dll;PBuild.dll;gl_inst.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="1.03.00" ScanPattern="FblTp_Iso" Project="FblTp_Iso" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>FblTp_Iso.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="3.19.00" ScanPattern="FblTp_Iso" Project="FblTp_Iso" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>fbl_tp.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.03.02" ScanPattern="FblUpd_Ap" Project="FblUpd_Ap" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>_upd_ap.h;_upd_ap_cfg.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.00.02" ScanPattern="FblUpd_Ap_Gm" Project="FblUpd_Ap_Gm" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>_upd_oem_ap.h;_upd_oem_cfg.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.00.01" ScanPattern="FblUpd_Ap_Rh850" Project="FblUpd_Ap_Rh850" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>_upd_hw_ap.h;_upd_hw_cfg.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.00.00" ScanPattern="FblUpd_Main" Project="FblUpd_Main" Delivered="true" Component="Application"/>
+        <Component Version="3.02.04" ScanPattern="FblUpd_Main" Project="FblUpd_Main" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>_upd_cfg.h;upd_main.h;upd_types.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.03.00" ScanPattern="FblVtabAppl_Rh850" Project="FblVtabAppl_Rh850" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>applvect.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.03.00" ScanPattern="FblVtab_Rh850" Project="FblVtab_Rh850" Delivered="true" Component="Implementation"/>
+        <Component Version="2.11.00" ScanPattern="FblWd" Project="FblWd" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>fbl_wd.h</RelativeFileSpec>
+        </Component>
+        <Component Version="2.01.00" ScanPattern="FblWrapperCom_Can" Project="FblWrapperCom_Can" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>FblWrapperCom_Can.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="2.01.81" ScanPattern="FblWrapperCom_Can" Project="FblWrapperCom_Can" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>fbl_cw.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.07.00" ScanPattern="FblWrapperFlash_Rh850Rv40His" Project="FblWrapperFlash_Rh850Rv40His" Delivered="true" Component="Impl_Main">
+            <RelativeFileSpec>fbl_flio.h</RelativeFileSpec>
+        </Component>
+        <Component Version="9.03.01" ScanPattern="GenTool_CanDbLib" Project="GenTool_CanDbLib" Delivered="true" Component="GenTool_Geny"/>
+        <Component Version="2.10.00" ScanPattern="GenTool_GenyFblCanBase" Project="GenTool_GenyFblCanBase" Delivered="true" Component="Description"/>
+        <Component Version="5.16.00" ScanPattern="GenTool_GenyFblCanBase" Project="GenTool_GenyFblCanBase" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>GenTool_GenyFblCanBase.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="2.10.03" ScanPattern="GenTool_GenyFrameworkCsyntax" Project="GenTool_GenyFrameworkCsyntax" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>CSyntax.dll;Cynthia.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="1.15.00" ScanPattern="GenTool_GenyFrameworkGenXml" Project="GenTool_GenyFrameworkGenXml" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>GenXML.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="1.03.00" ScanPattern="GenTool_GenyGraphicsLibCan" Project="GenTool_GenyGraphicsLibCan" Delivered="true" Component="GenTool_Geny"/>
+        <Component Version="1.05.01" ScanPattern="GenTool_GenyGuiChannelCfg" Project="GenTool_GenyGuiChannelCfg" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>CanLinCfgar.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="1.00.01" ScanPattern="GenTool_GenyHtmlConfigDocumentor" Project="GenTool_GenyHtmlConfigDocumentor" Delivered="true" Component="Implementation"/>
+        <Component Version="1.28.00" ScanPattern="GenTool_GenyObjectHierarchyCan" Project="GenTool_GenyObjectHierarchyCan" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>ohcanar.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="2.12.01" ScanPattern="GenTool_GenyObjectModel" Project="GenTool_GenyObjectModel" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>GenTool_GenyObjectModel.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="2.03.00" ScanPattern="GenTool_GenyPluginConfigDocumentor" Project="GenTool_GenyPluginConfigDocumentor" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>GenTool_GenyPluginConfigDocumentor.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="2.00.00" ScanPattern="GenTool_GenyVcfgNameDecorator" Project="GenTool_GenyVcfgNameDecorator" Delivered="true" Component="Description"/>
+        <Component Version="2.27.00" ScanPattern="GenTool_GenyVcfgNameDecorator" Project="GenTool_GenyVcfgNameDecorator" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>GenTool_GenyVcfgNameDecorator.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="1.00.00" ScanPattern="GenTool_XChecksumcrc" Project="GenTool_XChecksumcrc" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>GenTool_XChecksumcrc.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="1.11.00" ScanPattern="Hw_Rh850Cpu" Project="Hw_Rh850Cpu" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>Hw_Rh850Cpu.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="2.12.00" ScanPattern="Hw_Sh2RscanCpuCan" Project="Hw_Sh2RscanCpuCan" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>Hw_Sh2RscanCpuCan.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="2.31.01" ScanPattern="Hw__baseCpuCan" Project="Hw__baseCpuCan" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>AFRSettings.dll;Hw__baseCpuCan.dll;MaskPSW.dll;chpcfg01.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="1.00.01" ScanPattern="SysService_CmprLzma" Project="SysService_CmprLzma" Delivered="true" Component="Application">
+            <RelativeFileSpec>COMPRESS_LZMA_ENCODE.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="1.00.01" ScanPattern="SysService_CmprLzma" Project="SysService_CmprLzma" Delivered="true" Component="Impl_Wrapper">
+            <RelativeFileSpec>_cmpr_lzma_cfg.h;cmpr_lzma.h</RelativeFileSpec>
+        </Component>
+        <Component Version="2.20.02" ScanPattern="SysService_CmprLzma" Project="SysService_CmprLzma" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>COMPRESS_LZMA.h;COMPRESS_LZMA_DECODE.h;COMPRESS_LZMA_DECODE_Conf.h;COMPRESS_LZMA_DECODE_ConfDefaults.h;COMPRESS_LZMA_DECODE_Int.h;COMPRESS_LZMA_Int.h</RelativeFileSpec>
+        </Component>
+        <Component Version="2.06.01" ScanPattern="SysService_CryptoCv" Project="SysService_CryptoCv" Delivered="true" Component="Impl_ESLib">
+            <RelativeFileSpec>ESLib.h;ESLib_ASN_1.h;ESLib_Config.h;ESLib_ERC.h;ESLib_RNG.h;ESLib_V1.1_compatibility.h;ESLib_t.h;ESLib_types.h;ESLib_version.h</RelativeFileSpec>
+        </Component>
+        <Component Version="2.05.01" ScanPattern="SysService_CryptoCv" Project="SysService_CryptoCv" Delivered="true" Component="Impl_actCLib">
+            <RelativeFileSpec>act25519util.h;actAES.h;actBigNum.h;actBigNumGCD.h;actConfig.h;actDES.h;actECDH.h;actECDSA.h;actECKey.h;actECLengthInfo.h;actECPoint.h;actECTools.h;actEd25519.h;actEd25519core.h;actExternRandom.h;actFIPS186.h;actIAES.h;actICMACAES.h;actIECDH.h;actIECDSA.h;actIECKey.h;actIEd25519.h;actIGCM.h;actIGHash.h;actIHashMAC.h;actIHashMACRMD160.h;actIHashMACSHA256.h;actIKDF2.h;actIKDFX963.h;actIMD5.h;actIRMD160.h;actIRSA.h;actIRSAExp.h;actISHA.h;actISHA2_32.h;actISHA2_64.h;actISipHash.h;actITypes.h;actIX25519.h;actPadding.h;actPlatformTypes.h;actRC2.h;actTDES.h;actUtilities.h;actVersion.h;actWatchdog.h;actX25519core.h</RelativeFileSpec>
+        </Component>
+        <Component Version="2.00.00" ScanPattern="SysService_SecModHis" Project="SysService_SecModHis" Delivered="true" Component="Description"/>
+        <Component Version="1.05.00" ScanPattern="SysService_SecModHis" Project="SysService_SecModHis" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>SysService_SecModHis.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="2.03.00" ScanPattern="SysService_SecModHis" Project="SysService_SecModHis" Delivered="true" Component="Impl_Crc">
+            <RelativeFileSpec>Sec_Crc.h</RelativeFileSpec>
+        </Component>
+        <Component Version="2.04.02" ScanPattern="SysService_SecModHis" Project="SysService_SecModHis" Delivered="true" Component="Impl_Verification">
+            <RelativeFileSpec>Sec_Verification.h;Sec_VerificationLib.h</RelativeFileSpec>
+        </Component>
+        <Component Version="2.04.00" ScanPattern="SysService_SecModHis" Project="SysService_SecModHis" Delivered="true" Component="Impl_Workspace">
+            <RelativeFileSpec>Sec_Workspace.h</RelativeFileSpec>
+        </Component>
+        <Component Version="2.06.00" ScanPattern="SysService_SecModHis" Project="SysService_SecModHis" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>Sec.h;SecM.h;SecM_Inc.h;Sec_Compat.h;Sec_Inc.h;Sec_Types.h;_SecMPar.h;_SecM_cfg.h</RelativeFileSpec>
+        </Component>
+        <Component Version="1.02.00" ScanPattern="SysService_WrapperNv" Project="SysService_WrapperNv" Delivered="true" Component="Description"/>
+        <Component Version="1.02.00" ScanPattern="SysService_WrapperNv" Project="SysService_WrapperNv" Delivered="true" Component="GenTool_Geny">
+            <RelativeFileSpec>SysService_WrapperNv.dll</RelativeFileSpec>
+        </Component>
+        <Component Version="2.02.02" ScanPattern="SysService_WrapperNv" Project="SysService_WrapperNv" Delivered="true" Component="Implementation">
+            <RelativeFileSpec>WrapNv.h;_WrapNv_Cfg.h;_WrapNv_Cfg.h;_WrapNv_inc.h</RelativeFileSpec>
+        </Component>
+    </ComponentCheck>
+    <DeliveryVersionNumber>
+        <Byte>06</Byte>
+        <Byte>04</Byte>
+        <Byte>03</Byte>
+        <Byte>01</Byte>
+        <Byte>50</Byte>
+        <Byte>06</Byte>
+        <Byte>35</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+    </DeliveryVersionNumber>
+    <Transformators>
+	
+	
+	
+	<Version Fix="2" Major="1" Minor="2"/>
+	<DataMaxVersion Major="1" Minor="1"/>
+	<SourceHeader>
+		<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" version="1.0">
+			<xsl:output method="text"/>
+		</xsl:stylesheet>
+	</SourceHeader>
+	<HtmlOutput>
+		<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0">
+			<xsl:output method="html"/>
+			
+			
+			<xsl:template match="/">
+				<html>
+					<head>
+						<title>
+							<xsl:text>Delivery description </xsl:text>
+							<xsl:value-of select="/CANbeddedVersionInfo/Properties/CBD"/>
+						</title>
+						<style>
+			     * {
+					  font-family: Verdana, Helvetica, sans-serif;
+					  color:black;
+				 }
+
+				  body {
+					  background: #F7F7F7;
+					  margin: 0;
+					  padding: 0;
+					  link=#234691; 
+					  vlink=#234691;
+				 }
+				 h1 {
+					  font-size: 16pt;
+					  color: white;
+					  text-align: center;
+					  background: #AD0829;
+					  padding:	20px 10px 20px 10px;
+				  }
+				  h3 {
+					  font-size: 12pt;
+					  color: black;
+					  padding: 4px 10px 4px 10px;
+					  border-bottom: medium solid;
+					  border-bottom-color: #AD0829;				  }
+                  h4 {
+					  font-size: 10pt;
+					  font-weight:  bold;
+					  padding: 4px 10px 4px 10px;
+				  }
+				  table {
+					  width: 90%;
+					  border-collapse: collapse;  /* separate*/
+					  margin-left: auto;    /* center table horizontally */
+					  margin-right: auto;
+				  }
+				  th {
+					  text-align:   left;
+					  font-weight:  bold;
+					  background: #DEDEDE;
+				  }
+				  tr.even {
+					  background: #EEEEEE;
+				  }
+				 p, td, th, li {
+					  font-size: 10pt;
+					  vertical-align: top;
+					  padding-right: 1em;
+				  }
+				 td.highlight {
+					  width: 20%;
+					  text-align: right;
+					  color: #AD0829;
+				  }
+				 td.bold {
+					  font-weight:  bold;
+				  }
+				 .small-text {
+					  font-size: 8pt;
+				  }
+			 </style>
+					</head>
+					
+					<body>
+						
+						<xsl:variable name="vIsMerged">
+							<xsl:choose>
+								<xsl:when test="count(/CANbeddedVersionInfo/MergedPackage)&gt;0">
+									<xsl:text>True</xsl:text>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:text>False</xsl:text>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:variable>
+						
+						<xsl:variable name="vBaseAddress" select="/CANbeddedVersionInfo/MergedPackage[$vIsMerged='True']|/CANbeddedVersionInfo[$vIsMerged='False']"/>
+						
+						<xsl:variable name="vIsBuild">
+							<xsl:choose>
+								<xsl:when test="count($vBaseAddress//makesupport)&gt;0">
+									<xsl:text>True</xsl:text>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:text>False</xsl:text>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:variable>
+						
+						<h1>
+							<xsl:text>Delivery Description </xsl:text>
+							<xsl:value-of select="/CANbeddedVersionInfo/Properties/CBD"/>
+							<xsl:if test="$vIsMerged='True'">
+								<xsl:text> with </xsl:text>
+								<xsl:for-each select="$vBaseAddress//SubPackage">
+									<xsl:value-of select=".//CBD"/>
+									<xsl:text> </xsl:text>
+								</xsl:for-each>
+							</xsl:if>
+						</h1>
+						
+						<h4>Delivery Information</h4>
+						<ul type="disc">
+							<xsl:for-each select="$vBaseAddress//Properties">
+								<xsl:sort select=".//CBD"/>
+								<xsl:variable name="vDeliverLink">
+									<xsl:text>#_Delivery_Information_</xsl:text>
+									<xsl:value-of select="position()"/>
+								</xsl:variable>
+								<xsl:variable name="vDeliverName">
+									<xsl:choose>
+										<xsl:when test="$vIsMerged='True'">
+											<xsl:text>Delivery Information - </xsl:text>
+											<xsl:value-of select=".//CBD"/>
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:text>Delivery Information</xsl:text>
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:variable>
+								<li>
+									<a href="{$vDeliverLink}">
+										<xsl:value-of select="$vDeliverName"/>
+									</a>
+								</li>
+							</xsl:for-each>
+							
+							<li>
+								<a href="#_Detailed_Version_Information">Detailed Version Information</a>
+							</li>
+						</ul>
+						
+						<xsl:if test="$vIsBuild='True'">
+							<h4>Build Environment</h4>
+							<ul type="disc">
+								<xsl:for-each select="$vBaseAddress//makesupport">
+									<xsl:sort select="..//CBD"/>
+									<li>
+										<xsl:variable name="vDeliverLink">
+											<xsl:text>#_BuildEnvironment_</xsl:text>
+											<xsl:value-of select="position()"/>
+										</xsl:variable>
+										<xsl:variable name="vDeliverName">
+											<xsl:choose>
+												<xsl:when test="$vIsMerged='True'">
+													<xsl:text>Versions and Options - </xsl:text>
+													<xsl:value-of select="../Properties/CBD"/>
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:text>Versions and Options</xsl:text>
+												</xsl:otherwise>
+											</xsl:choose>
+										</xsl:variable>
+										<a href="{$vDeliverLink}">
+											<xsl:value-of select="$vDeliverName"/>
+										</a>
+									</li>
+								</xsl:for-each>
+							</ul>
+						</xsl:if>
+						<br/>
+						
+						
+						<xsl:for-each select="$vBaseAddress[$vIsMerged!='True']|$vBaseAddress/*[$vIsMerged='True']">
+							<xsl:sort select=".//CBD"/>
+							<xsl:call-template name="CBD_DeliveryInfo"/>
+						</xsl:for-each>
+						
+						<xsl:call-template name="DetailedVersionInfo"/>
+						
+						<xsl:if test="$vIsBuild='True'">
+							<h2>Build Environment</h2>
+							<xsl:for-each select="$vBaseAddress//makesupport[$vIsMerged!='True']|$vBaseAddress/*//makesupport[$vIsMerged='True']">
+								<xsl:sort select="..//CBD"/>
+								<xsl:call-template name="BuildEnvironment"/>
+							</xsl:for-each>
+						</xsl:if>
+					</body>
+				</html>
+			</xsl:template>
+			
+			
+			<xsl:template name="CBD_DeliveryInfo">
+				<xsl:variable name="varID">
+					<xsl:text>_Delivery_Information_</xsl:text>
+					<xsl:value-of select="position()"/>
+				</xsl:variable>
+				<h3>
+					<a id="{$varID}">Delivery Information <xsl:value-of select=".//Properties/CBD "/>
+					</a>
+				</h3>
+				<table>
+					
+					<xsl:call-template name="DeliveryId"/>
+					
+					<tr>
+						<td class="highlight">License Information</td>
+						<td>
+							<xsl:value-of select=".//Properties/Customer"/>
+						</td>
+					</tr>
+					
+					<xsl:if test=".//Properties/Eval='true'">
+						<tr>
+							<td class="highlight">Evaluation License</td>
+							<td class="bold">
+								<xsl:text>This license is for evaluation and prototyping purposes only.</xsl:text>
+							</td>
+						</tr>
+					</xsl:if>
+					
+					<xsl:call-template name="CustomerContacts"/>
+					
+					<xsl:call-template name="VectorContact"/>
+					
+					<xsl:call-template name="DeliveryInfoGeneral"/>
+				</table>
+			</xsl:template>
+			
+			
+			<xsl:template name="DetailedVersionInfo">
+				<h3>
+					<a id="_Detailed_Version_Information">Detailed Version Information</a>
+				</h3>
+				<table>
+					<tbody>
+						<tr>
+							<th>Project</th>
+							<th>Component</th>
+							<th>Version</th>
+						</tr>
+						<xsl:for-each select="/CANbeddedVersionInfo/ComponentCheck/Component">
+							<xsl:variable name="class">
+								<xsl:choose>
+									<xsl:when test="position() mod 2 = 1">odd</xsl:when>
+									<xsl:otherwise>even</xsl:otherwise>
+								</xsl:choose>
+							</xsl:variable>
+							<tr class="{$class}">
+								<td>
+									<xsl:value-of select="@Project"/>
+								</td>
+								<td>
+									<xsl:value-of select="@Component"/>
+								</td>
+								<td>
+									<xsl:value-of select="@Version"/>
+								</td>
+							</tr>
+						</xsl:for-each>
+					</tbody>
+				</table>
+			</xsl:template>
+			
+			
+			<xsl:template name="BuildEnvironment">
+				<xsl:variable name="vDeliverLink">
+					<xsl:text>_BuildEnvironment_</xsl:text>
+					<xsl:value-of select="position()"/>
+				</xsl:variable>
+				<h3>
+					<a id="{$vDeliverLink}">Versions and Options - <xsl:value-of select="..//CBD"/>
+					</a>
+				</h3>
+				<table>
+					<xsl:for-each select="./devtoolinfo/tool">
+						<tr class="even">
+							
+							<td colspan="2">
+								<xsl:value-of select="@type"/>
+							</td>
+						</tr>
+						<xsl:for-each select="./entry">
+							<tr>
+								<td class="highlight">
+									<xsl:value-of select="@type"/>
+								</td>
+								<td>
+									<xsl:value-of select="."/>
+								</td>
+							</tr>
+						</xsl:for-each>
+					</xsl:for-each>
+				</table>
+			</xsl:template>
+			
+			
+			<xsl:template name="DeliveryInfoGeneral">
+				
+				<tr>
+					<td class="highlight">Order Confirmation Number</td>
+					<td>
+						<xsl:value-of select=".//Properties/ProjectNumber"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="highlight">Delivery Number</td>
+					<td>
+						<xsl:value-of select=".//Properties/Release"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="highlight">Delivery Type</td>
+					<td>
+						<xsl:value-of select=".//Properties/DeliveryType"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="highlight">Release Type</td>
+					<td>
+						<xsl:value-of select=".//Properties/ReleaseType"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="highlight">Ordered Derivative</td>
+					<td>
+						<xsl:value-of select=".//Properties/OrderedDerivative"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="highlight">SIP Version</td>
+					<td>
+						<xsl:value-of select=".//Properties/SIP"/>
+					</td>
+				</tr>
+			</xsl:template>
+			
+			
+			<xsl:template name="CustomerContacts">
+				<xsl:if test="count(.//Properties/ErrataContacts) &gt; 0">
+					<tr>
+						<td class="highlight">Customer Contacts</td>
+						<td>
+							<xsl:for-each select=".//Properties/ErrataContacts/ErrataContact">
+								<xsl:value-of select="Firstname"/>
+								<xsl:text> </xsl:text>
+								<xsl:value-of select="Surname"/>
+								<xsl:text>   </xsl:text>
+								<span color="blue">
+									<a>
+										<xsl:attribute name="href">
+                <xsl:text>Mailto:</xsl:text>
+                <xsl:value-of select="Email"/>
+            </xsl:attribute>
+										<xsl:value-of select="Email"/>
+									</a>
+								</span>
+								<br/>
+							</xsl:for-each>
+							<span class="small-text">Contact address for Vector for all topics concerning this license. This includes questions and issue reports. Please inform Vector if this contact changes.</span>
+						</td>
+					</tr>
+				</xsl:if>
+				
+				<xsl:if test="count(.//Properties/ErrataContacts)&lt;= 0">
+					<tr>
+						<td class="highlight">Customer Contacts</td>
+						<td>
+							<xsl:text>You have not defined any contact. Therefore Vector will not be able to inform you about potential issues</xsl:text>
+						</td>
+					</tr>
+				</xsl:if>
+			</xsl:template>
+			
+			
+			<xsl:template name="VectorContact">
+				<tr>
+					<td class="highlight">Vector Contact</td>
+					<td>
+						<a>
+							<xsl:attribute name="href">
+    <xsl:text>Mailto:</xsl:text>
+    <xsl:value-of select=".//Properties/CustomerContact/Email"/>
+</xsl:attribute>
+							<xsl:value-of select=".//Properties/CustomerContact/Email"/>
+						</a>
+						<br/>
+						<span class="small-text">Contact address at Vector for all questions concerning this delivery.</span>
+					</td>
+				</tr>
+			</xsl:template>
+			
+			
+			<xsl:template name="DeliveryId">
+				<tr>
+					<td class="highlight">Delivery ID</td>
+					<td>
+						<xsl:for-each select=".//DeliveryVersionNumber/Byte">
+							<xsl:value-of select="."/>
+							<xsl:text>.</xsl:text>
+						</xsl:for-each>
+						<br/>
+						<span class="small-text">This is the unique identification number of this delivery. Please have this number ready at hand when contacting Vector customer support.</span>
+					</td>
+				</tr>
+			</xsl:template>
+		</xsl:stylesheet>
+	</HtmlOutput>
+</Transformators>
+</CANbeddedVersionInfo>

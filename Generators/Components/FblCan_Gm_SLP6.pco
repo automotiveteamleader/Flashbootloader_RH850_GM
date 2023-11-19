@@ -1,0 +1,1472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by Vector Employee (Vector Informatik GmbH) -->
+<!--********************************************************************************************************************
+ *   This is the GENy OEM preconfig file for GM SLP6
+ *......................................................................................................................
+ * User rights
+ *   This file should not be modified.
+ *   If you have any change requests, please contact: fblsupport@vector.com
+ *......................................................................................................................
+ * Authors
+ *  NAME                          INITALS
+ *  Andreas Wenckebach            AWh
+ *  Dennis O'Donnell              Dod
+ *  Alexander Starke              ASe
+ *......................................................................................................................
+ * History
+ *   DATE        VERSION   AUTHOR  DESCRIPTION
+ *   2013-11-29  01.00.00  AWh     Creation (Inherit from SLP4,5)
+ *   2013-12-18                    Add Tp preconfiguration, add NVM preconfiguration
+ *   2014-04-08            Dod     Update for latest fbl_hdr module
+ *   2014-06-12            AWh     Default Own memcpy
+ *   2014-07-10                    Change SBA-ticket length to include Data_Type
+ *   2014-10-17                    Add help texts, remove items not used in SLP6
+ *   2014-11-26                    Add #define FBL_ENABLE_SECMOD_VECTOR
+ *   2014-11-26                    Allow for Data processing.
+ *   2014-12-20                    Correction: Allow for Data processing.
+ *   2015-02-13  01.01.00  AWh     Allow FblStart configuration, allow data processing configuration
+ *   2015-03-04  01.02.00  AWh     Default Security delay timeout to 0 to allow latest Secmod usage
+ *   2015-06-10  01.03.00  ASe     Added preconfiguration of MandatoryDeliveryPreconfig.cfg
+ *                         AWh     Allow overwriting P2/P2* timeout values, remove Security Access configurable,
+ *                                  remove SecurityClassDDD and CRCwritten Secmod configuration items.
+ *   2015-06-17  01.03.01  ASe     Remove unused SysService_WrapperNv config column
+ *   2016-03-02  01.03.02  AWh     Change long info for Block Index
+ *   2016-04-15  01.04.00  AWh     Change to GB6002 V1.3 default P2*timing
+ *   2016-07-25  01.05.00  AWh     Add fblCommonData configuration, add Cw 2.xx
+ *   2016-12-13  01.05.01  AWh     Allow Mor flexible CAN_RX_SLOT_STARTMSG configuration (for hw file if variants)
+ *   2017-04-07  01.05.02  AWh     Add FBL_ENABLE_BUSTYPE_CAN
+ ***********************************************************************************************************************-->
+<config name="GM SLP6" default="true" guid="123456FF-789a-bcde-f012-3456789abcde" xmlns="http://www.vector-informatik.de/CANGen/ModulePreconfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vector-informatik.de/CANGen/ModulePreconfig \\Vistrpscfs1\Project2\GENTOOL\NextCANGen\VersionCurrent_Develop\PreconfigFiles\preconfig.xsd">
+	<description>GM SLP6 preconfig file</description>
+	<module name="GenTool_GenyFblCanBase[DC24762F-729C-4a9f-ACD3-EA1B7918C5EB]" version="1.0">
+		<!-- Start LBT features -->
+		<attribute name="MaxReprogAttempts" class="LogicalBlock">
+			<default value="0"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="VerificationRam" class="LogicalBlock">
+			<default value="FblHdrPipelinedVerifyIntegrity"/>
+			<access value="rdwr"/>
+		</attribute>
+		<attribute name="VerificationRom" class="LogicalBlock">
+			<default value="FblHdrVerifyIntegrity"/>
+			<access value="rdwr"/>
+		</attribute>
+		<attribute name="BlockIndex" class="LogicalBlock">
+			<default value="1"/>
+			<access value="rdwr"/>
+			<longinfo> The handling for GM is the following (Please refer also to the documentation):
+- "Block Index"  Index of the logical block.  Must be equivalent to the partition ID of the operating software that it represents (i.e. 0x1 for main application, 0x11 for second application, 0x21 for third application, 0x31 for fourth application).
+- Calibration partitions shall not have their own entry, calibration space check will be done on shared application/calibration block entry</longinfo>
+		</attribute>
+		<attribute name="Name" class="LogicalBlock">
+			<default value="Application and Calibration Area "/>
+		</attribute>
+		<!--
+		<attribute name="NameOfDeviceType" class="MemoryDevice">
+			<default value="New Defined Name"/>
+		</attribute>
+		-->
+		<!-- End LBT features -->
+	</module>
+	<module name="FblWrapperCom_Can" version="2.0">
+		<attribute name="ReadOnly" class="OTModuleInstance">
+			<default value="false"/>
+		</attribute>
+		<attribute name="UserSection" class="OTModuleInstance">
+			<default value="/* FblWrapperCom_Can feature selection */
+#define FBL_CW_ENABLE_PHYSICAL_RANGE_HANDLER
+#define FBL_CW_ENABLE_FUNCTIONAL_RANGE_HANDLER
+#define FBL_CW_ENABLE_PHYSICAL_REQUEST_HANDLER
+#if defined( FBL_ENABLE_XCP )
+# define FBL_CW_ENABLE_XCP_REQUEST_HANDLER
+#endif
+#define FBL_ENABLE_BUSTYPE_CAN
+"/>
+			<userlevel value="normal"/>
+			<access value="no"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description/>
+		</attribute>
+		<!--Connections Preconfiguration-->
+		<attribute name="CanMessageCsv" class="OTModuleInstance">
+			<default value="DiagnosticPhysical;DiagnosticPhysical;DiagnosticFunctional;DiagnosticPhysical"/>
+		</attribute>
+		<attribute name="DirectionCsv" class="OTModuleInstance">
+			<default value="Request;Request;Request;Response"/>
+		</attribute>
+		<attribute name="IndicationConfirmationFunctionCsv" class="OTModuleInstance">
+			<default value="FblCwProcessPhysicalRangeRequest;FblCwProcessPhysicalRequest;FblCwProcessFunctionalRangeRequest;FblTpConfirmation"/>
+		</attribute>
+		<attribute name="MessageObjectCsv" class="OTModuleInstance">
+			<default value="1;0;2;0"/>
+		</attribute>
+		<attribute name="AddressingModeCsv" class="OTModuleInstance">
+			<default value="NormalFixed;Normal;NormalFixed;NormalFixed"/>
+		</attribute>
+		<attribute name="ReceiveHandleCsv" class="OTModuleInstance">
+			<default value="FblRxRange0Hdl;FblRxCanMsg0Hdl;FblRxRange1Hdl;V_NULL"/>
+		</attribute>
+		<attribute name="ReceiveRangeMask1" class="OTModuleInstance">
+			<default value="0xFF"/>
+		</attribute>
+		<attribute name="ReceiveRangeExtendedIdentifier1" class="OTModuleInstance">
+			<default value="true"/>
+		</attribute>
+		<attribute name="ReceiveRangeMask2" class="OTModuleInstance">
+			<default value="0xFF"/>
+		</attribute>
+		<attribute name="ReceiveRangeExtendedIdentifier2" class="OTModuleInstance">
+			<default value="true"/>
+		</attribute>
+	</module>
+	<module name="FblTp_Iso" version="1.0">
+		<description>Configuration of Fbl_TpIso module</description>
+		<attribute name="FblTpIsoStandard" class="OTModuleInstance">
+			<default value="0"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="1"/>
+		</attribute>
+		<attribute name="FblTpFillPattern" class="OTModuleInstance">
+			<default value="0xff"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpCheckFunctionalTA" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpLowestFunctionalAddress" class="OTModuleInstance">
+			<default value="0xff"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpHighestFunctionalAddress" class="OTModuleInstance">
+			<default value="0"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpOwnEcuNumber" class="OTModuleInstance">
+			<default value="17"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpCanIdBaseAddr" class="OTModuleInstance">
+			<default value="1536"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpCanIdOffset" class="OTModuleInstance">
+			<default value="0xff"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpPadding" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpAcceptLargeData" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpUseOverrun" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpUseIsoCompliance" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpUseOnlyFirstFC" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpCheckFlowState" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpNoStminAfterFC" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpWaitForCorrectSN" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpIso15765_2_2" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpVariableTxDlc" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpFixRxDlcCheck" class="OTModuleInstance">
+			<default value="0"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpInternalMemcpy" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpCallCycle" class="OTModuleInstance">
+			<default value="1"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpCanConfirmation" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<!-- GMW3110 V1.6, 6.3.1 Network Layer Timing Parameter Definitions, N_as -->
+		<attribute name="FblTpConfIntTime" class="OTModuleInstance">
+			<default value="250"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpBlocksize" class="OTModuleInstance">
+			<default value="0"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpStmin" class="OTModuleInstance">
+			<default value="0"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<!-- GMW3110 V1.6, 6.3.1 Network Layer Timing Parameter Definitions, N_Bs -->
+		<attribute name="FblTpTimeoutFC" class="OTModuleInstance">
+			<default value="250"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<!-- GMW3110 V1.6, 6.3.1 Network Layer Timing Parameter Definitions, N_Cr -->
+		<attribute name="FblTpTimeoutCF" class="OTModuleInstance">
+			<default value="250"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpTransmitCF" class="OTModuleInstance">
+			<default value="10"/>
+			<userlevel value="normal"/>
+			<access value="no"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpErrorInd" class="OTModuleInstance">
+			<default value="FblCwTpErrorIndication"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpConfirmInd" class="OTModuleInstance">
+			<default value="FblCwTpConfirmation"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpCopyFromCAN" class="OTModuleInstance">
+			<default value="(void)(MEMCPY((dst), (src), (len) ))"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpCopyToCAN" class="OTModuleInstance">
+			<default value="(void)(MEMCPY((dst), (src), (len) ))"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpNotifyTx" class="OTModuleInstance">
+			<default value=""/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpCanMessageTransmitted" class="OTModuleInstance">
+			<default value=""/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpDataInd" class="OTModuleInstance">
+			<default value="FblCwTpDataInd"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpDataIndOverrun" class="OTModuleInstance">
+			<default value="FblCwTpDataIndBO"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+		</attribute>
+		<attribute name="FblTpCanMessageReceived" class="OTModuleInstance">
+			<default value=""/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpRxSF" class="OTModuleInstance">
+			<default value="FblCwTpRxStartIndication"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpRxFF" class="OTModuleInstance">
+			<default value="FblCwTpRxStartIndication"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpRxCF" class="OTModuleInstance">
+			<default value=""/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="FblTpMsgTooLong" class="OTModuleInstance">
+			<default value=""/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+	</module>
+	<module name="DriverBase" version="1.0">
+		<description>Configuration of DriverBase features</description>
+		<attribute name="SplitTxRxBuffers" class="OTMessage">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is never used. 2006-08-07 SHH: added as workaround for ESCAN 16782.</description>
+		</attribute>
+		<attribute name="OsekOS" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+			<shortinfo>Description above is incorrect. This sets C_XXX_OSEK_OS,
+which is only used together with other options. Please select for OSEK cat.2 interrupts.
+                  </shortinfo>
+			<longinfo>Description above is incorrect. This sets C_XXX_OSEK_OS, which
+is only used together with other options. Please select for OSEK cat.2 interrupts.
+                 </longinfo>
+		</attribute>
+		<attribute name="EnableSymbolicSignalValueNames" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+	</module>
+	<module name="DriverCan13" version="1.0">
+		<disable value="false"/>
+		<description>Preconfiguration file for all CAN drivers</description>
+		<attribute name="ReceiveFunction" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Required by FBL implementation</description>
+		</attribute>
+		<attribute name="InterruptControlByApplication" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="ActivePassiveState" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="TransmitQueue" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="TxObserve" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="MsgNotMatchedFct" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="HardwareLoopCheck" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="PartOffline" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="GenericPrecopy" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="UseCanCopyFromCan" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="LowLevelMsgTransmit" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Configuration for Ford Transparent Diagnostic Gateway. Attribute will be enabled automatically if component Gw_Route is activated.</description>
+		</attribute>
+		<attribute name="LowLevelMsgTransmitConfirmation" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Configuration for Ford Transparent Diagnostic Gateway. Attribute will be enabled automatically if component Gw_Route is activated.</description>
+		</attribute>
+		<attribute name="DynamicTxID" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="DynamicTxDLC" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="DynamicTxDataPtr" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="DynamicTxConfirmation" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="DynamicTxPreTransmit" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="DynamicTxObjects" class="OTChannel">
+			<default value="0"/>
+			<access value="none"/>
+		</attribute>
+		<attribute name="ExtendedIDsForRanges" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="SearchAlgorithm" class="OTModuleInstance">
+			<default value="0"/>
+			<userlevel value="normal"/>
+			<access value="rdonly"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>FBL supports linear search only.</description>
+		</attribute>
+		<attribute name="DebugLevel" class="OTModuleInstance">
+			<default value="0"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Assertions disabled by default.</description>
+		</attribute>
+		<attribute name="Ranges" class="OTChannel">
+			<attribute name="Range" class="OTChannel">
+				<attribute name="RangeExtIDs" class="OTModuleInstance">
+					<default value="false"/>
+					<userlevel value="normal"/>
+					<access value="none"/>
+					<settingkind value="application"/>
+					<configurable value="yes"/>
+				</attribute>
+				<attribute name="RangeOwnFilter" class="OTModuleInstance">
+					<default value="false"/>
+					<userlevel value="normal"/>
+					<access value="none"/>
+					<settingkind value="application"/>
+					<configurable value="yes"/>
+				</attribute>
+				<attribute name="RangeRxQueue" class="OTModuleInstance">
+					<default value="false"/>
+					<userlevel value="normal"/>
+					<access value="none"/>
+					<settingkind value="application"/>
+					<configurable value="yes"/>
+				</attribute>
+			</attribute>
+		</attribute>
+		<attribute name="EnableCanCanInterruptControl" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>CAN driver internal switch to disable interrupt handling code for FBL.</description>
+		</attribute>
+	</module>
+	<module name="DriverCAN14" version="1.0">
+		<description>Configuration of RI 14 features</description>
+		<attribute name="SecurityLevel_RI14" class="OTModuleInstance">
+			<default value="0"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Security level is set to 0 since the bootloader doesn't use interrupts.</description>
+		</attribute>
+		<attribute name="UseConfFunc" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is never used.</description>
+		</attribute>
+	</module>
+	<module name="DriverCANPartOfflineMgr13" version="1.0">
+		<disable value="false"/>
+		<description>Preconfiguration file for all CAN drivers</description>
+		<attribute name="OfflineMode0Name" class="OTModuleInstance">
+			<default value="USER0"/>
+			<userlevel value="normal"/>
+			<access value="rdonly"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="OfflineMode1Name" class="OTModuleInstance">
+			<default value="USER1"/>
+			<userlevel value="normal"/>
+			<access value="rdonly"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="OfflineMode2Name" class="OTModuleInstance">
+			<default value="USER2"/>
+			<userlevel value="normal"/>
+			<access value="rdonly"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="OfflineMode3Name" class="OTModuleInstance">
+			<default value="USER3"/>
+			<userlevel value="normal"/>
+			<access value="rdonly"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="OfflineMode4Name" class="OTModuleInstance">
+			<default value="USER4"/>
+			<userlevel value="normal"/>
+			<access value="rdonly"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="OfflineMode5Name" class="OTModuleInstance">
+			<default value="USER5"/>
+			<userlevel value="normal"/>
+			<access value="rdonly"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="OfflineMode6Name" class="OTModuleInstance">
+			<default value="USER6"/>
+			<userlevel value="normal"/>
+			<access value="rdonly"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="OfflineMode7Name" class="OTModuleInstance">
+			<default value="USER7"/>
+			<userlevel value="normal"/>
+			<access value="rdonly"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+	</module>
+	<module name="DriverHLVL14" version="1.0">
+		<description>Configuration of CAN driver high level features</description>
+		<attribute name="RxQueue" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="UseApplCanPreRxQueue" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="RxQueueSize" class="OTModuleInstance">
+			<default value="3"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+	</module>
+	<module name="DrvCan__baseRi15" version="1.0">
+		<description>Configuration of RI 15 features</description>
+		<attribute name="CanOnOffline" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="CanInterruptControlCallbacksEnabled" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="Polling Type" class="OTModuleInstance">
+			<default value="Type specific"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+		</attribute>
+		<attribute name="EnableRxBasicCANPolling" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+		</attribute>
+		<attribute name="EnableTxPolling" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+		</attribute>
+		<attribute name="EnableErrorPolling" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+		</attribute>
+		<attribute name="EnableRxFullCANPolling" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+		</attribute>
+		<attribute name="EnableWakeUpPolling" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+		</attribute>
+		<attribute name="CancelInHw" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="SleepWakeup" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="OsekOsInterruptCat2" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+		<attribute name="UseTxBitQueue" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+		</attribute>
+		<attribute name="CanRetransmit" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+			<description>ESCAN00049343: Enable CanRetransmit functionality (attribute not visible in GUI). Note: feature is not (yet) available for all hardware platforms!</description>
+		</attribute>
+	</module>
+	<module name="DrvCan__baseRi15Hll" version="1.0">
+		<description>Configuration of RI 15 HLL features</description>
+		<attribute name="RxQueueOverrunNotification" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description>Attribute is hidden as this feature is not used by the FBL</description>
+		</attribute>
+	</module>
+	<module name="FBL" version="5.0">
+		<description>Configuration of FBL module</description>
+		<attribute name="Fbl_UserConfigFile" class="OTModuleInstance">
+			<default value="$(ProjectDir)MandatoryDeliveryPreconfig.cfg"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<description>The user config file is mandatory. If the default path is wrong the user gets a warning. But he knows he has to do something.</description>
+		</attribute>
+		<attribute name="CommonData" class="OTModuleInstance">
+			<default value="true"/>
+			<access value="rdonly"/>
+			<longinfo>GM Specific: This option is always present to offer signature verification functionality and required public key information to application. The information is accessed e.g. from _appParseSba.c/.h template files.</longinfo>
+		</attribute>
+		<attribute name="FblStartFunction" class="OTModuleInstance">
+			<default value="true"/>
+			<access value="rdwr"/>
+		</attribute>
+		<attribute name="EncryptionMode" class="OTModuleInstance">
+			<default value="false"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="CompressionMode" class="OTModuleInstance">
+			<default value="false"/>
+			<access value="rdwr"/>
+		</attribute>
+		<!-- Start LibMem features -->
+		<attribute name="ProcBufferSize" class="OTModuleInstance">
+			<default value="1200"/>
+			<access value="rdwr"/>
+			<longinfo>This need to be configured large enough to hold a Gm header (worst case) + the largest possible produced decompression chunk.
+			For Arle this need to be 1188 minimum.</longinfo>
+		</attribute>
+		<attribute name="UnalignedDataTransfer" class="OTModuleInstance">
+			<default value="true"/>
+			<access value="rdonly"/>
+		</attribute>
+		<attribute name="PipelinedProgramming" class="OTModuleInstance">
+			<default value="false"/>
+			<access value="rdonly"/>
+		</attribute>
+		<attribute name="TransferDataChecksum" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="SigVerificationLength" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="AdaptiveDataTransferRcrrp" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="SuspendProgramming" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="WriteSegmentation" class="OTModuleInstance">
+			<default value="256"/>
+			<access value="rdonly"/>
+		</attribute>
+		<!-- End LibMem features -->
+		<attribute name="LbtGenBlockIndex" class="OTModuleInstance">
+			<default value="true"/>
+		</attribute>
+		<attribute name="LbtGenHeaderAddress" class="OTModuleInstance">
+			<default value="true"/>
+		</attribute>
+		<attribute name="LbtGenPresencePatternAddress" class="OTModuleInstance">
+			<default value="true"/>
+		</attribute>
+		<attribute name="LbtGenVerificationRam" class="OTModuleInstance">
+			<default value="true"/>
+		</attribute>
+		<attribute name="LbtGenVerificationRom" class="OTModuleInstance">
+			<default value="true"/>
+		</attribute>
+		<attribute name="Timer clock" class="OTModuleInstance">
+			<default value="64000"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+			<description/>
+		</attribute>
+		<attribute name="Diag buffer length (byte)" class="OTModuleInstance">
+			<default value="4095"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+			<description/>
+		</attribute>
+		<attribute name="Enable flashblock check" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+			<description/>
+		</attribute>
+		<attribute name="Fill code illegal opcode" class="OTModuleInstance">
+			<default value="0xC3"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+			<description/>
+		</attribute>
+		<attribute name="Multiple moduls" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+			<description/>
+		</attribute>
+		<!-- User config / User section -->
+		<attribute name="UserSection" class="OTModuleInstance">
+			<default value="#define FBL_ENABLE_CAN_CONFIRMATION
+/* Increase default buffer size to allow Sba ticket to fit in.
+ * (This is only relevant in case of Dummy Eeprom usage, usually this value can be ignored). */
+#define EEP_BUFFER_SIZE 0x400
+
+/* Set Diagnostic session timing ( overwritable via user preconfig, e.g. for OBD/EOBD relevant devices ) */
+#if !defined( FBL_DIAG_TIME_P2MAX )
+# define FBL_DIAG_TIME_P2MAX 100u /* GB6002 V1.3 defines 100ms max P2Server timing. */
+#endif
+#if !defined( FBL_DIAG_TIME_P3MAX )
+# define FBL_DIAG_TIME_P3MAX 30000u /* GB6002 V1.3 defines 30000ms max P2*Server timing. */
+#endif
+
+/* Define Id configuration */
+#if defined ( FBL_ENABLE_STDID_OPTIMIZATION )
+# undef FBL_ENABLE_STDID_OPTIMIZATION
+#endif
+#if defined ( FBL_ENABLE_EXTID_OPTIMIZATION )
+# undef FBL_ENABLE_EXTID_OPTIMIZATION
+#endif
+#if !defined ( FBL_DISABLE_STDID_OPTIMIZATION )
+# define FBL_DISABLE_STDID_OPTIMIZATION
+#endif
+#if !defined ( FBL_DISABLE_EXTID_OPTIMIZATION )
+# define FBL_DISABLE_EXTID_OPTIMIZATION
+#endif
+
+#if defined( FBL_ENABLE_MULTIPLE_NODES )
+# undef FBL_ENABLE_MULTIPLE_NODES
+# define FBL_CW_ENABLE_MULTIPLE_NODES
+#endif
+
+#define kCanTxOk kFblCanTxOk
+
+#if defined( FBL_ENABLE_STAY_IN_BOOT )
+# if !defined( CAN_RX_SLOT_STARTMSG )
+/* For some hw files this is 'CAN_RX_SLOT_RANGE_0', please overwrite CAN_RX_SLOT_STARTMSG to this, *
+ * if you get a compile error for the below                                                        */
+#  define CAN_RX_SLOT_STARTMSG CAN_RX_RANGE_0
+# endif /* CAN_RX_SLOT_STARTMSG */
+#endif /* FBL_ENABLE_STAY_IN_BOOT */
+
+
+/* Security module related */
+#if defined ( FBL_ENABLE_VERIFY_INTEGRITY_WORD )
+  /* SEC_ENABLE_SECURITY_CLASS_VENDOR required when using FBL_ENABLE_VERIFY_INTEGRITY_WORD */
+# define SEC_ENABLE_SECURITY_CLASS_VENDOR
+#endif
+#define SEC_ENABLE_WORKSPACE_INTERNAL
+#define SEC_ENABLE_WORKSPACE_EXTERNAL
+#define SEC_ENABLE_VERIFICATION_KEY_EXTERNAL
+#define SEC_ENABLE_KEY_LOCATION_RAM
+#define SEC_SIZE_CHECKSUM_VENDOR          2u
+#define SEC_SECURITY_CLASS_VERIFY         SEC_CLASS_CCC
+#define SEC_SECURITY_CLASS_VERIFICATION   SEC_CLASS_DDD
+
+#define FBL_ENABLE_KEY_EXPORT
+#define FBL_ENABLE_SECMOD_VECTOR
+#define FBLCW_ENABLE_RECEPTION_IN_STATE_TASK
+#define FBL_CW_ENABLE_RECEPTION_IN_STATE_TASK
+
+#if defined( FBL_ENABLE_APPL_TASK )
+# if !defined( FBL_DISABLE_APPL_STATE_TASK )
+#  define FBL_ENABLE_APPL_STATE_TASK
+# endif
+# if !defined( FBL_DISABLE_APPL_TIMER_TASK )
+#  define FBL_ENABLE_APPL_TIMER_TASK
+# endif
+#endif
+
+#if defined( VGEN_ENABLE_XCP )
+# define FBL_ENABLE_XCP
+#endif
+"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description/>
+		</attribute>
+		<attribute name="Enable_HighSpeed" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+		</attribute>
+		<attribute name="Enable_TpId" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="none"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description/>
+		</attribute>
+		<attribute name="Max segments per block" class="OTModuleInstance">
+			<default value="10"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description/>
+		</attribute>
+		<attribute name="EnableStayInBoot" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description/>
+		</attribute>
+		<attribute name="Enable sleep mode" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="rdonly"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description/>
+			<longinfo> Always enabled for GM SLP6. Implement ApplFblEnterStopMode() empty if you do not want to go to sleep. </longinfo>
+		</attribute>
+		<attribute name="UseOwnMemCpyFunc" class="OTModuleInstance">
+			<default value="true"/>
+			<userlevel value="normal"/>
+			<access value="rdwr"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description/>
+		</attribute>
+	</module>
+	<module name="FblCan_14230_Gm" version="1.0">
+		<!-- Start SLP6 preconfig -->
+		<attribute name="ModuleName" class="OTModuleFactory">
+			<default value="FblCan_GM_Global_B"/>
+		</attribute>
+		<attribute name="FblCan_GM_EnableSecurity-Access" class="OTModuleInstance">
+			<default value="true"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_EnableCANConfiguration" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_NodeTable" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_ResetMsDelay" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_EnableRAMIntegrityCheck" class="OTModuleInstance">
+			<shortinfo>Configure Ram Integrity Check</shortinfo>
+			<longinfo>The Global Bootloader Specification requires that the FBL performs an integrity check on RAM, and report the result to the DID reading the BIS (Bootloader Initialization Status).  When enabled, the FBL will invoke ApplFblRamIntegrityCheck() to perform this function.  If disabled, the FBL will not perform the RAM check.
+
+Note: If several regions are required, only the first region can be configured in GENy, any further regions will have to be configured inside fbl_ap.c ApplFblRamIntegrityCheck() address table.</longinfo>
+		</attribute>
+		<attribute name="FblCan_GM_RamIntegrityStartAddr" class="OTModuleInstance">
+			<shortinfo>Ram Integrity Check Start Address</shortinfo>
+			<longinfo>Start address of RAM region to be checked. Region should include all RAM used by the bootloader (stack, global variables, flashCode buffer)
+
+Note: If several regions are required, only the first region can be configured in GENy, any further regions will have to be configured inside fbl_ap.c ApplFblRamIntegrityCheck() address table.</longinfo>
+      </attribute>
+		<attribute name="FblCan_GM_RamIntegrityEndAddr" class="OTModuleInstance">
+			<shortinfo>Ram Integrity Check End Address</shortinfo>
+			<longinfo>End address of RAM region to be checked. Region should include all RAM used by the bootloader (stack, global variables, flashCode buffer)
+
+Note: If several regions are required, only the first region can be configured in GENy, any further regions will have to be configured inside fbl_ap.c ApplFblRamIntegrityCheck() address table.</longinfo>
+      </attribute>
+		<attribute name="FblCan_GM_EnableROMIntegrityCheck" class="OTModuleInstance">
+			<shortinfo>Ram Integrity Check End Address</shortinfo>
+			<longinfo>The GM "Global Bootloader Specification" requires that the FBL perform an integrity check on FBL ROM, and report the result  DID reading the BIS (Bootloader Initialization Status).  When enabled, the FBL will calculate the checksum based on the Address Regions configured in GENY.  If disabled, the FBL will not perform the ROM check.
+
+Note :
+The check regions will have to be configured inside GENy Boot Info Block Parameters->FblCan_GM_PMAAddressLengthPool below.</longinfo>
+      </attribute>
+      <attribute name="FblCan_GM_GapFill" class="OTModuleInstance">
+			<default value="true"/>
+         <access value="rdwr"/>
+			<shortinfo>Unused Byte feature</shortinfo>
+			<longinfo>If enabled, the FBL will fill all unused regions of the non-volatile device(s) with "Fill Code" specified in FblDrvCan_XX configuration at the end of the download. The drop box below allows you to configure detailed behavior for this selection.
+
+If disabled, unused regions will contain the value resulting from the device's erase operation.
+
+Compare Global Bootloader specification chapter "Unused bytes": "GM shall determine with the ECU supplier if the Pad bytes will be programmed and what the Pad and Fill bytes value should be. "</longinfo>
+      </attribute>
+      <attribute name="FblCan_GM_CalibrationModules" class="OTModuleInstance">
+			<shortinfo>Allow calibration modules in Bootloader</shortinfo>
+         <longinfo>Bootloader supports calibration files if enabled. Disable this option in order to reduce code size.</longinfo>
+      </attribute>
+      <attribute name="FblCan_GM_MultiAppModules" class="OTModuleInstance">
+			<shortinfo>Allow calibration modules in Bootloader</shortinfo>
+         <longinfo>Bootloader supports multiple application module downloads if enabled. Disable this option in order to reduce code size.
+
+Check the documentation for further configuration aspects.</longinfo>
+      </attribute>
+      <attribute name="FblCan_GM_EnableSecurity-Access" class="OTModuleInstance">
+			<shortinfo>Security access</shortinfo>
+			<longinfo>If enabled, the FBL will support Security Access $27 service.
+If disabled, the FBL will respond with "Service-Not-Supported"; Secured services (Programming session) will behave as if the ECU were unlocked.</longinfo>
+      </attribute>
+      <attribute name="FblCan_GM_Checksum" class="OTModuleInstance">
+			<shortinfo>Fbl Checksum</shortinfo>
+			<longinfo>This field defines the Reference checksum calculated with Rom Integrity check for the bootloader. Post-processing tools can be used to update this field after the FBL has been compiled.</longinfo>
+      </attribute>
+            <attribute name="FblCan_GM_FBLSWMI" class="OTModuleInstance">
+			<shortinfo>Boot Info Block: Hex Part number</shortinfo>
+         <longinfo>This field defines the Fbl's Boot Info Block parameter "Hex part number" (Software module Id).</longinfo>
+      </attribute>
+            <attribute name="FblCan_GM_DLS" class="OTModuleInstance">
+			<shortinfo>Boot Info Block: Design Level suffix</shortinfo>
+			<longinfo>This field defines the Fbl's Boot Info Block parameter "DLS" (Design Level Suffix).</longinfo>
+      </attribute>
+            <attribute name="FblCan_GM_BootInfoEcuName" class="OTModuleInstance">
+			<default value="DemoFbl1"/>
+			<access value="rdwr"/>
+			<shortinfo>Boot Info Block: ECU name</shortinfo>
+			<longinfo>This field defines the Fbl's Boot Info Block parameter "ECU Name" This is what the specification says: "This  field  contains  an  ASCII  representation  of  the  ECU Name." It is the reference where a signed header field of any downloaded module is compared to.</longinfo>
+      </attribute>
+            <attribute name="FblCan_GM_DCID" class="OTModuleInstance">
+			<shortinfo>Boot Info Block: BCID</shortinfo>
+			<longinfo>This field defines the Fbl's Boot Info Block parameter "BCID" (Bootloader Compatibility Identifier). This is what the specification says: "This value  is  also  included  in  the  application  software header. During  a programming event, the bootloader verifies if the BCID in the software header match the BCID value defined here."</longinfo>
+      </attribute>
+            <attribute name="FblCan_GM_BootInfoEcuId1" class="OTModuleInstance">
+               <shortinfo>ECU ID byte 1/4</shortinfo>
+               <longinfo>ECU ID byte 1/4
+Ecu ID needs to be unique for every single piece of controller, check GM specifications on how to create it.
+
+The value you edit here is generated to Boot Info Block. ApplFblNVMReadECUID() will read the ECU-Id. Per default the callback reads this value. For production you have to take care this value gets unique e.g. by reading from different location or by exchanging the information in hex inside Boot Info Block or some other method.</longinfo>
+      </attribute>
+                  <attribute name="FblCan_GM_BootInfoEcuId2" class="OTModuleInstance">
+			<shortinfo>ECU ID byte 2/4</shortinfo>
+         <longinfo>ECU ID byte 2/4
+Ecu ID needs to be unique for every single piece of controller, check GM specifications on how to create it.
+
+The value you edit here is generated to Boot Info Block. ApplFblNVMReadECUID() will read the ECU-Id. Per default the callback reads this value. For production you have to take care this value gets unique e.g. by reading from different location or by exchanging the information in hex inside Boot Info Block or some other method.</longinfo>
+      </attribute>
+                  <attribute name="FblCan_GM_BootInfoEcuId3" class="OTModuleInstance">
+			<shortinfo>ECU ID byte 3/4</shortinfo>
+         <longinfo>ECU ID byte 3/4
+Ecu ID needs to be unique for every single piece of controller, check GM specifications on how to create it.
+
+The value you edit here is generated to Boot Info Block. ApplFblNVMReadECUID() will read the ECU-Id. Per default the callback reads this value. For production you have to take care this value gets unique e.g. by reading from different location or by exchanging the information in hex inside Boot Info Block or some other method.</longinfo>
+      </attribute>
+      <attribute name="FblCan_GM_BootInfoEcuId4" class="OTModuleInstance">
+			<default value="1"/>
+			<access value="rdwr"/>
+			<shortinfo>ECU ID byte 4/4</shortinfo>
+         <longinfo>ECU ID byte 4/4
+Ecu ID needs to be unique for every single piece of controller, check GM specifications on how to create it.
+
+The value you edit here is generated to Boot Info Block. ApplFblNVMReadECUID() will read the ECU-Id. Per default the callback reads this value. For production you have to take care this value gets unique e.g. by reading from different location or by exchanging the information in hex inside Boot Info Block or some other method.</longinfo>
+      </attribute>
+      <attribute name="FblCan_GM_BootInfoSubjectName" class="OTModuleInstance">
+			<shortinfo>Boot Info Block: Subject Name</shortinfo>
+         <longinfo>This field defines the Fbl's Boot Info Block parameter "Subject Name"
+This is what the specification says: "Subject Name is an ECU family name which is embedded in the subject  name  field  of  the  signing  certificate.  It  is  a  16  byte hexadecimal  value  that  identifies  the  group  of  ECUs  for  which the Signer Info is applicable. It is used during the programming process  to  determine  if  the  Signer  Info  is  compatible  with  the target.  Example: Powertrain, Infotainment, Telematics, etc."</longinfo>
+      </attribute>
+
+      <attribute name="FblCan_GM_PMAAddressLengthPool" class="OTModuleInstance">
+			<shortinfo>Fbl Product Memory Address</shortinfo>
+         <longinfo>These address/length fields are used for RomIntegrity check calculation of the Fbl.</longinfo>
+      </attribute>
+      <attribute name="FblCan_GM_EnableRead-Memory-By-Address" class="OTModuleInstance">
+			<default value="false"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_EnableWrite-Data-By-Identifier" class="OTModuleInstance">
+			<default value="false"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_EnableInitiate-Diagnostic-Operation" class="OTModuleInstance">
+			<default value="false"/>
+			<access value="hide"/>
+      </attribute>
+		<attribute name="FblCan_GM_Read-Memory-By-AddressAddressLength" class="OTModuleInstance">
+			<default value="4 bytes"/>
+			<access value="hide"/>
+      </attribute>
+		<attribute name="FblCan_GM_Request-DownloadMemory-SizeLength" class="OTModuleInstance">
+			<default value="4 bytes"/>
+			<access value="hide"/>
+      </attribute>
+		<attribute name="FblCan_GM_Transfer-DataAddressLength" class="OTModuleInstance">
+			<default value="4 bytes"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_SeedAndKeySize" class="OTModuleInstance">
+			<access value="hide"/>
+			<longinfo> Not configured via GENy for Fbl, can be overwritten by defining kSecSeedLength defaulted in fbl_diag_oem.h </longinfo>
+		</attribute>
+		<attribute name="FblCan_GM_HeaderOffsetToLbt" class="OTModuleInstance">
+			<default value="0x0"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_Header_Absolute" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_PPOffsetToHeader" class="OTModuleInstance">
+			<default value="0x0"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_PPOffsetToHeader_Absolute" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_ComputeAbsoluteAddresses" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_Gmw3110_V15" class="OTModuleInstance">
+			<default value="false"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_EnableBootUnlockedSecurity-Access" class="OTModuleInstance">
+			<default value="false"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_IndependentCalibrations" class="OTModuleInstance">
+			<default value="false"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_ReservedModules" class="OTModuleInstance">
+			<default value="false"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_MultiAppModules" class="OTModuleInstance">
+			<default value="false"/>
+			<access value="rdwr"/>
+		</attribute>
+		<attribute name="FblCan_GM_ApplRegions" class="OTModuleInstance">
+			<default value="MULTI"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_MaxNoam" class="OTModuleInstance">
+			<default value="19"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_GapFill_Behavior" class="OTModuleInstance">
+			<default value="NO_PATTERN_CHECK"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="FblCan_GM_FBLModuleID" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<!-- End SLP6 preconfig -->
+		<attribute name="FblCan_GM_EnableHigh-Speed" class="OTModuleInstance">
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+			<description/>
+      </attribute>
+		<!-- ||| START ||| Controller specific features -->
+		<attribute name="EnableDirectMemoryAddressing" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+			<description/>
+		</attribute>
+		<attribute name="Fbl_sector_start" class="OTModuleInstance">
+			<default value="0x0"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+			<description/>
+		</attribute>
+		<attribute name="Fbl_sector_end" class="OTModuleInstance">
+			<default value="0x0"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="yes"/>
+			<description/>
+		</attribute>
+		<!-- ||| END   ||| Controller specific features -->
+		<!-- ||| START ||| Secured Download related configuration items, that need to be removed! -->
+		<attribute name="FblCan_GM_SecuredDownload" class="OTModuleInstance">
+			<default value="false"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description/>
+		</attribute>
+		<attribute name="FblCan_GM_SignatureVersion" class="OTModuleInstance">
+			<default value="0"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description/>
+		</attribute>
+		<attribute name="FblCan_GM_InitialKeyID" class="OTModuleInstance">
+			<default value="1"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description/>
+		</attribute>
+		<attribute name="FblCan_GM_KeyID_DID" class="OTModuleInstance">
+			<default value="1"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description/>
+		</attribute>
+		<attribute name="FblCan_GM_UpdateKeyStartAddr" class="OTModuleInstance">
+			<default value="0"/>
+			<userlevel value="normal"/>
+			<access value="hide"/>
+			<settingkind value="application"/>
+			<configurable value="no"/>
+			<description/>
+		</attribute>
+		<!-- ||| END  ||| Secured Download related configuration items -->
+	</module>
+	<module name="SysService_WrapperNv[E33629CC-BE3B-461A-B287-A75E1EE9E560]" version="1.0">
+		<attribute name="Default" class="DataElement">
+			<access value="hide"/>
+			<description>Feature not implemented.</description>
+		</attribute>
+	</module>
+	<module name="SysService_WrapperNv" version="1.0">
+		<attribute name="MemoryLayout" class="OTModuleInstance">
+			<default value="&lt;MemoryLayout&gt;&lt;DataBlock Name=&quot;Fbl_Nvm_Data_Set&quot; Count=&quot;1&quot; Description=&quot;FBL NVM Set (NBIDs, ECU_ID, Sba)&quot;&gt;&lt;DataElement Generate=&quot;true&quot; Name=&quot;Key_NBID&quot; Length=&quot;2&quot; Default=&quot;&quot; Description=&quot;&quot;/&gt;&lt;DataElement Generate=&quot;true&quot; Name=&quot;App_NBID&quot; Length=&quot;2&quot; Default=&quot;&quot; Description=&quot;&quot;/&gt;&lt;DataElement Generate=&quot;true&quot; Name=&quot;ECU_ID&quot; Length=&quot;16&quot; Default=&quot;&quot; Description=&quot;&quot;/&gt;&lt;DataElement Generate=&quot;true&quot; Name=&quot;SBA_ticket&quot; Length=&quot;822&quot; Default=&quot;&quot; Description=&quot;&quot;/&gt;&lt;/DataBlock&gt;&lt;/MemoryLayout&gt;"/>
+		</attribute>
+	</module>
+	<module name="SysService_SecModHis" version="1.0">
+		<attribute name="SecurityClassDDD" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="CRCwritten" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="Constant for key" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="Constant for key" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="HashAlgorithm" class="OTModuleInstance">
+			<default value="2"/>
+			<access value="rdonly"/>
+		</attribute>
+		<attribute name="Security class" class="OTModuleInstance">
+			<default value="2"/>
+			<access value="rdonly"/>
+		</attribute>
+		<attribute name="Timeout for key (ms)" class="OTModuleInstance">
+			<default value="0"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="Call cycle" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="Call cycle" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="Access Mode" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="CRC" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="EnableCrcTotal" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="EnableDecryption" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="EnableLengthAddressInput" class="OTModuleInstance">
+			<default value="false"/>
+			<access value="hide"/>
+		</attribute>
+		<attribute name="SignatureOffset" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+		<attribute name="CRCOffset" class="OTModuleInstance">
+			<access value="hide"/>
+		</attribute>
+	</module>
+</config>

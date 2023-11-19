@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-0-3.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="f3031cc8-f367-42cb-b2b2-331e67ef4724">
+      <SHORT-NAME>MICROSAR</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="cd62c217-6723-45ff-a092-70802fe57a3b">
+          <SHORT-NAME>CanTrcv_Tja1145</SHORT-NAME>
+          <ELEMENTS>
+            <BSW-IMPLEMENTATION UUID="d47a5edd-cf56-42c2-8ee2-c5d5d373bc7e">
+              <SHORT-NAME>CanTrcv_Impl</SHORT-NAME>
+              <MC-SUPPORT/>
+              <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+              <SW-VERSION>3.05.00</SW-VERSION>
+              <USED-CODE-GENERATOR>cMSR</USED-CODE-GENERATOR>
+              <VENDOR-ID>30</VENDOR-ID>
+              <AR-RELEASE-VERSION>4.00.03</AR-RELEASE-VERSION>
+              <BEHAVIOR-REF DEST="BSW-INTERNAL-BEHAVIOR">/MICROSAR/CanTrcv_Tja1145_ib_bswmd/BswModuleDescriptions/CanTrcv/CanTrcv_Tja11145_Behavior</BEHAVIOR-REF>
+              <VENDOR-API-INFIX>Tja1145</VENDOR-API-INFIX>
+            </BSW-IMPLEMENTATION>
+          </ELEMENTS>
+        </AR-PACKAGE>
+        <AR-PACKAGE UUID="f391cfa0-acaa-4947-9d4e-8757b0852554">
+          <SHORT-NAME>CanTrcv_Tja1145_ib_bswmd</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE UUID="e31bf34e-9783-4f0c-b238-37ec33faacef">
+              <SHORT-NAME>BswModuleDescriptions</SHORT-NAME>
+              <ELEMENTS>
+                <BSW-MODULE-DESCRIPTION UUID="a1304d54-8f55-43bb-9e96-11c540819a83">
+                  <SHORT-NAME>CanTrcv</SHORT-NAME>
+                  <INTERNAL-BEHAVIORS>
+                    <BSW-INTERNAL-BEHAVIOR UUID="b6006e88-cb68-421c-8ab2-d250a4dfd2c0">
+                      <SHORT-NAME>CanTrcv_Tja11145_Behavior</SHORT-NAME>
+                      <EXCLUSIVE-AREAS>
+                        <EXCLUSIVE-AREA UUID="d7091f82-5e9c-4f1e-aaac-3e07aa4737ec">
+                          <SHORT-NAME>CANTRCV_30_TJA1145_EXCLUSIVE_AREA_0</SHORT-NAME>
+                        </EXCLUSIVE-AREA>
+                      </EXCLUSIVE-AREAS>
+                      <ENTITYS>
+                        <BSW-SCHEDULABLE-ENTITY UUID="c6cd4954-7b6d-4422-a4d2-939a9098be15">
+                          <SHORT-NAME>CanTrcv_30_Tja1145_MainFunction</SHORT-NAME>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/MICROSAR/CanTrcv_Tja1145_ib_bswmd/BswModuleDescriptions/CanTrcv_30_Tja1145_MainFunction</IMPLEMENTED-ENTRY-REF>
+                        </BSW-SCHEDULABLE-ENTITY>
+                      </ENTITYS>
+                      <EVENTS>
+                        <BSW-TIMING-EVENT UUID="b4cb9df4-3970-4416-a748-d22cd1c45076">
+                          <SHORT-NAME>CanTrcv_30_Tja1145_MainFunctionTimingEvent0</SHORT-NAME>
+                          <STARTS-ON-EVENT-REF DEST="BSW-SCHEDULABLE-ENTITY">/MICROSAR/CanTrcv_Tja1145_ib_bswmd/BswModuleDescriptions/CanTrcv/CanTrcv_Tja11145_Behavior/CanTrcv_30_Tja1145_MainFunction</STARTS-ON-EVENT-REF>
+                          <PERIOD>0.01</PERIOD>
+                        </BSW-TIMING-EVENT>
+                      </EVENTS>
+                    </BSW-INTERNAL-BEHAVIOR>
+                  </INTERNAL-BEHAVIORS>
+                </BSW-MODULE-DESCRIPTION>
+                <BSW-MODULE-ENTRY UUID="382d8e38-045d-4566-9be5-5eea2b18a222">
+                  <SHORT-NAME>CanTrcv_30_Tja1145_MainFunction</SHORT-NAME>
+                  <CALL-TYPE>SCHEDULED</CALL-TYPE>
+                  <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                </BSW-MODULE-ENTRY>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+        <AR-PACKAGE UUID="28ad6219-dcb0-4f4b-8eab-a5078dd5630e">
+          <SHORT-NAME>CanTrcv_30_Tja1145_ib_bswmd</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE UUID="1e007bcf-7851-45c2-8649-1aa49407cb04">
+              <SHORT-NAME>XcpEvents</SHORT-NAME>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

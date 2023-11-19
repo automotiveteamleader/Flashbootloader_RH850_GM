@@ -1,0 +1,105 @@
+#######################################################################################################################
+# File Name  : Makefile.derivative.memorymap                                                                          #
+# Description: Memory size definition for each supported derivative                                                   #
+# Project    : Vector Basic Runtime System                                                                            #
+# Module     : BrsHw for Platform RH850                                                                               #
+#                                                                                                                     #
+#---------------------------------------------------------------------------------------------------------------------#
+# COPYRIGHT                                                                                                           #
+#---------------------------------------------------------------------------------------------------------------------#
+# Copyright (c) 2016 by Vector Informatik GmbH.                                                  All rights reserved. #
+#                                                                                                                     #
+#---------------------------------------------------------------------------------------------------------------------#
+# AUTHOR IDENTITY                                                                                                     #
+#---------------------------------------------------------------------------------------------------------------------#
+# Name                          Initials      Company                                                                 #
+# ----------------------------  ------------  ------------------------------------------------------------------------#
+# Benjamin Walter               visbwa        Vector Informatik GmbH                                                  #
+# Johannes Kempf                viskj         Vector Informatik GmbH                                                  #
+# Nika Hamidi                   vinhi         Vector Informatik GmbH                                                  #
+#---------------------------------------------------------------------------------------------------------------------#
+# REVISION HISTORY                                                                                                    #
+#---------------------------------------------------------------------------------------------------------------------#
+# Version   Date        Author  Description                                                                           #
+# --------  ----------  ------  --------------------------------------------------------------------------------------#
+# 01.00.00  2014-07-08  visbwa  Initial version                                                                       #
+# 01.01.00  2016-06-29  viskj   Adaptions for support of RAM initialization ('k' after ram-size)                      #
+# 01.02.00  2016-06-30  visbwa  Changed header information according to Brs_Template 2.00.02                          #
+# 01.03.00  2016-07-11  visnhi  Added required section for F1H family                                                 #
+#######################################################################################################################
+
+###########################################################################################################
+####  Check for all necessary/used variables                                                           ####
+###########################################################################################################
+ifeq ($(DERIVATIVE_GROUP_$(DERIVATIVE)),)
+ $(error "Derivative Group for your DERIVATIVE is not yet defined within Makefile.derivative.settings.")
+endif
+
+ifeq ($(GLOBAL_RAM_SIZE_$(DERIVATIVE)),)
+ $(error "Global RAM size for your DERIVATIVE is not yet defined within Makefile.derivative.settings.")
+endif
+
+ifeq ($(DERIVATIVE_GROUP_$(DERIVATIVE)),F1H)
+  ifeq ($(LOCAL_RAM_SIZE_CORE0_$(DERIVATIVE)),)
+   $(error "RAM size for your DERIVATIVE is not yet defined within Makefile.derivative.settings.")
+  endif
+  
+  ifeq ($(LOCAL_RAM_SIZE_CORE1_$(DERIVATIVE)),)
+   $(error "RAM size for your DERIVATIVE is not yet defined within Makefile.derivative.settings.")
+  endif
+
+  ifeq ($($(DERIVATIVE_GROUP_$(DERIVATIVE))_LOCAL_RAM_START_ADDRESS_CORE0_$(LOCAL_RAM_SIZE_CORE0_$(DERIVATIVE))),)
+   $(error "RAM start address $(DERIVATIVE_GROUP_$(DERIVATIVE))_LOCAL_RAM_START_ADDRESS_CORE0_$(LOCAL_RAM_SIZE_CORE0_$(DERIVATIVE)) is not yet defined within Makefile.derivative.settings.")
+  endif
+
+  ifeq ($($(DERIVATIVE_GROUP_$(DERIVATIVE))_LOCAL_RAM_START_ADDRESS_CORE1_$(LOCAL_RAM_SIZE_CORE1_$(DERIVATIVE))),)
+   $(error "RAM start address $(DERIVATIVE_GROUP_$(DERIVATIVE))_LOCAL_RAM_START_ADDRESS_CORE1_$(LOCAL_RAM_SIZE_CORE1_$(DERIVATIVE)) is not yet defined within Makefile.derivative.settings.")
+  endif
+
+else
+  ifeq ($($(DERIVATIVE_GROUP_$(DERIVATIVE))_RAM_START_ADDRESS_$(GLOBAL_RAM_SIZE_$(DERIVATIVE))),)
+   $(error "Global RAM start address $(DERIVATIVE_GROUP_$(DERIVATIVE))_RAM_START_ADDRESS_$(GLOBAL_RAM_SIZE_$(DERIVATIVE)) is not yet defined within Makefile.derivative.settings.")
+  endif
+endif
+
+###########################################################################################################
+####  MEMORY MAP FOR GHS / DIAB                                                                        ####
+###########################################################################################################
+ifeq ($(DERIVATIVE_GROUP_$(DERIVATIVE)),F1H)
+  define MEMORY_ALLGROUPS
+    $(ECHO) "  iROM_0A      : ORIGIN = 0x00000000, LENGTH = $(CODEFLASH_SIZE_BANKA_$(DERIVATIVE))k"                                                                                   >> $@; \
+    $(ECHO) "  iROM_0B      : ORIGIN = 0x00800000, LENGTH = $(CODEFLASH_SIZE_BANKB_$(DERIVATIVE))k"                                                                                   >> $@; \
+    $(ECHO) "  iROM_1       : ORIGIN = 0x01000000, LENGTH = 32k"                                                                                                                     >> $@; \
+    $(ECHO) "  iRAM_CORE0   : ORIGIN = $($(DERIVATIVE_GROUP_$(DERIVATIVE))_LOCAL_RAM_START_ADDRESS_CORE0_$(LOCAL_RAM_SIZE_CORE0_$(DERIVATIVE))),  LENGTH = $(LOCAL_RAM_SIZE_CORE0_$(DERIVATIVE))k" >> $@; \
+    $(ECHO) "  iRAM_CORE1   : ORIGIN = $($(DERIVATIVE_GROUP_$(DERIVATIVE))_LOCAL_RAM_START_ADDRESS_CORE1_$(LOCAL_RAM_SIZE_CORE1_$(DERIVATIVE))),  LENGTH = $(LOCAL_RAM_SIZE_CORE1_$(DERIVATIVE))k" >> $@; \
+    $(ECHO) "  gRAM_A       : ORIGIN = $($(DERIVATIVE_GROUP_$(DERIVATIVE))_GLOBAL_RAM_BANK_A_START_ADDRESS_$(GLOBAL_RAM_SIZE_$(DERIVATIVE))),  LENGTH = $(GLOBAL_RAM_SIZE_$(DERIVATIVE))k" >> $@; \
+    $(ECHO) "  gRAM_B       : ORIGIN = $($(DERIVATIVE_GROUP_$(DERIVATIVE))_GLOBAL_RAM_BANK_B_START_ADDRESS_$(GLOBAL_RAM_SIZE_$(DERIVATIVE))),  LENGTH = $(GLOBAL_RAM_SIZE_$(DERIVATIVE))k" >> $@; 
+  endef
+
+else
+  define MEMORY_ALLGROUPS
+    $(ECHO) "  iROM_0A    : ORIGIN = 0x00000000, LENGTH = $(CODEFLASH_SIZE_$(DERIVATIVE))k"                                                                  >> $@; \
+    $(ECHO) "  iROM_1     : ORIGIN = 0x01000000, LENGTH = 32k"                                                                                               >> $@; \
+    $(ECHO) "  iRAM_CORE0 : ORIGIN = $($(DERIVATIVE_GROUP_$(DERIVATIVE))_RAM_START_ADDRESS_$(GLOBAL_RAM_SIZE_$(DERIVATIVE))),  LENGTH = $(GLOBAL_RAM_SIZE_$(DERIVATIVE))k" >> $@;
+  endef
+endif
+
+###########################################################################################################
+####  MEMORY MAP FOR IAR COMPILER                                                                      ####
+###########################################################################################################
+ifeq ($(DERIVATIVE_GROUP_$(DERIVATIVE)),F1H)
+  define MEMORY_ALLGROUPS_IAR
+    $(ECHO) "define region ROM_near       = mem:[from 0x00000000 size 0x8000];"                                 >> $@; \
+    $(ECHO) "define region ROM_A_region   = mem:[from 0x00000000 size $(CODEFLASH_SIZE_BANKA_$(DERIVATIVE))k];" >> $@; \
+    $(ECHO) "define region ROM_B_region   = mem:[from 0x00800000 size $(CODEFLASH_SIZE_BANKB_$(DERIVATIVE))k];" >> $@; \
+    $(ECHO) "define region RAM_PRI_region_Corre0 = mem:[from $($(DERIVATIVE_GROUP_$(DERIVATIVE))_LOCAL_RAM_START_ADDRESS_CORE0_$(LOCAL_RAM_SIZE_CORE0_$(DERIVATIVE))) size $(LOCAL_RAM_SIZE_CORE0_$(DERIVATIVE))k]; " >> $@;
+    $(ECHO) "define region RAM_PRI_region_Corre1 = mem:[from $($(DERIVATIVE_GROUP_$(DERIVATIVE))_LOCAL_RAM_START_ADDRESS_CORE1_$(LOCAL_RAM_SIZE_CORE1_$(DERIVATIVE))) size $(LOCAL_RAM_SIZE_CORE1_$(DERIVATIVE))k]; " >> $@;
+  endef
+
+else
+  define MEMORY_ALLGROUPS_IAR
+    $(ECHO) "define region ROM_near       = mem:[from 0x00000000 size 0x8000];"                                 >> $@; \
+    $(ECHO) "define region ROM_region     = mem:[from 0x00000000 size $(CODEFLASH_SIZE_$(DERIVATIVE))k];"       >> $@; \
+    $(ECHO) "define region RAM_PRI_region = mem:[from $($(DERIVATIVE_GROUP_$(DERIVATIVE))_RAM_START_ADDRESS_$(GLOBAL_RAM_SIZE_$(DERIVATIVE))) size $(GLOBAL_RAM_SIZE_$(DERIVATIVE))k]; " >> $@;
+  endef
+endif

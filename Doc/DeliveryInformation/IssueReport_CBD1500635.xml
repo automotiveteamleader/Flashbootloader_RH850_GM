@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issueReport xmlns="urn:com:vector:pes:issuereport"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="urn:com:vector:pes:issuereport Interchange_Format_IssueReport-v1.xsd">
+   <schemaVersion>1</schemaVersion>
+   <reportData>
+      <title>Open Issues in 'CBD1500635'</title>
+      <reportCreationDate>2017-07-27</reportCreationDate>
+      <reportIdentifier>CBD1500635-D03-2017-07-27-16:13:37</reportIdentifier>
+   </reportData>
+   <license>
+      <licenseNumber>CBD1500635</licenseNumber>
+      <customer>Nexteer Automotive Corporation
+Package: FBL Gm SLP6</customer>
+      <vectorContactEmail>fblsupport@us.vector.com</vectorContactEmail>
+      <maintenanceExpiryDate>2016-02-01</maintenanceExpiryDate>
+   </license>
+   <deliveries>
+      <delivery>
+         <releaseNumber>D03</releaseNumber>
+         <deliveryDate>2017-07-28</deliveryDate>
+         <slp>FBL Gm SLP6</slp>
+         <sip>06.04.03</sip>
+      </delivery>
+   </deliveries>
+   <issues>
+      <issue category="runtimeIssueWithWorkaround">
+         <identifier>ESCAN00092116</identifier>
+         <package>FblDrvFlash_Rh850Rv40His</package>
+         <subpackage>Impl_Base</subpackage>
+         <severity>Medium</severity>
+         <issueClass>Issue in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Long runtime of flash library functions can delay the Rx frame processing</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+Flash library operations might be very runtime consuming.
+This might delay the processing of a Rx frame that long, that the corresponding CAN mailbox has already been overwritten with the following Rx frame assigned to the mailbox.
+The download will abort with a NRC 0x73 (WrongBlockSequenceCounter).
+
+
+When does this happen:
+-------------------------------------------------------------------
+During the flash routines of the flash library.
+
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+-Usage of pipelined programming/early acknowledge
+-So far the behavior has only been detected on F1H and F1K derivatives</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+Driving the system with a higher clock also speed up the flash operations and reduces their runtime.
+(verified with R7F7015032+R7F7015874AFP @ 120MHz)
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>1.06.00</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+      <issue category="runtimeIssueWithWorkaround">
+         <identifier>ESCAN00096082</identifier>
+         <package>FBL_Gm_SLP6</package>
+         <subpackage>Preconfig</subpackage>
+         <severity>Medium</severity>
+         <issueClass>Issue in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>GB6002 V1.4.2 defines P2* back to 5000ms</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+A) GB6002 versions &lt; V1.3 and GB6002 versions &gt;= V1.4.2 define P2* to 5000 
+b) GB6002 versions &gt;= V1.3 and GB6002 versions &lt; V1.4.2 define P2* to 30000
+
+Some deliveries prepared for V1.4.2 still use intermediate variant b), but should use a)
+
+When does this happen:
+-------------------------------------------------------------------
+At configuration time.
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+Always</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+GENy based environment:
+- Overwrite FBL_DIAG_TIME_P3MAX within GENy FblDrvCan_XXX -&gt; User Config File loaded file (typically MandatoryDeliveryPreconfig.cfg)
+
+Da Vinci Configurator based environment:
+- Change the value  "Fbl-&gt;FblGeneral-&gt;P2* Server" in configuration to 5000ms
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>1.03.02</firstAffectedVersion>
+         <versionsFixed>1.05.12</versionsFixed>
+      </issue>
+      <issue category="runtimeIssueWithWorkaround">
+         <identifier>ESCAN00090572</identifier>
+         <package>FBL_TechRef_Gm</package>
+         <subpackage>Doc_TechRef</subpackage>
+         <severity>Medium</severity>
+         <issueClass>Issue in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Wrong documentation for ApplFblCanBusOff()</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+Bootloader  does not recover from bus-off
+
+
+When does this happen:
+-------------------------------------------------------------------
+When bootloader  enters bus-off and there is no recover strategy implemented in ApplFblCanBusOff()
+
+Issue can be caused by wrong information in documentation in the API description of ApplFblCanBusOff().
+"No action is required in order to recover."
+
+This statement is wrong.  The user must implement a recover strategy in ApplFblCanBusOff().
+
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+All</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+Implement bus-off recovery strategy in ApplFblCanBusOff().
+
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>6.00.00</firstAffectedVersion>
+         <versionsFixed>6.03.00</versionsFixed>
+      </issue>
+      <issue category="runtimeIssueWithWorkaround">
+         <identifier>ESCAN00095101</identifier>
+         <package>FblDiag_14229_Gm</package>
+         <subpackage>Implementation</subpackage>
+         <severity>Medium</severity>
+         <issueClass>Issue in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Tester connection shall not be fixed in default session</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+Tester connection is fixed once communication happens in default session.
+This is unintended, instead tester connection shall stay flexible in default session.
+
+When does this happen:
+-------------------------------------------------------------------
+When tester communicates with Fbl in default session.
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+If FBL_DIAG_ENABLE_GM_RESET_TESTER_IN_DEF_SESSION is not set.</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+Set this macro (e.g. in MandatoryDeliveryPreconfig.cfg, content generated to fbl_cfg.h):
+
+#define  FBL_DIAG_ENABLE_GM_RESET_TESTER_IN_DEF_SESSION
+
+In order to check the configuration is OK:
+- Before adding the above macro to configuration, verify, that tester is fixed in default session.
+   so e.g. communication is not possible to tester F2 after communicating with tester F3 to the Fbl after reset
+- After adding the macro, verify communication in default session is possible to different testers
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>4.01.03</firstAffectedVersion>
+         <versionsFixed>4.03.01</versionsFixed>
+      </issue>
+      <issue category="apparentIssue">
+         <identifier>ESCAN00081436</identifier>
+         <package>FblDrvFlash_Rh850Rv40His</package>
+         <subpackage>Impl_Base</subpackage>
+         <severity>Low</severity>
+         <issueClass>Issue in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Using FlashDriver_SetResetVector() might cause exception</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+When using FlashDriver_SetResetVector() an exception occurs.
+
+When does this happen:
+-------------------------------------------------------------------
+When code called from wdTriggerFct (typically FblLookForWatchdog()) is not located in RAM.
+This may apply e.g. to the Communication Wrapper task functions.
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+if FLASH_ENABLE_SET_RESETVECTOR_API is enabled.</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+ Either manually handle memDrvDeviceActive in the updater or locate any code referenced by FblLookForWatchdog() in RAM
+
+
+Resolution:
+-------------------------------------------------------------------
+None.</resolutionDescription>
+         <firstAffectedVersion>1.02.00</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+      <issue category="apparentIssue">
+         <identifier>ESCAN00091938</identifier>
+         <package>FblTool_Hexeditor_Hexview</package>
+         <subpackage>Application_Exe</subpackage>
+         <severity>Low</severity>
+         <issueClass>Issue in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Merging does not work</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+Merging two files does not work.
+
+
+When does this happen:
+-------------------------------------------------------------------
+When merging two files using command line option /MT or /MO without an offset but with a range.
+
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+In all configuration.</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+Specify an offset of zero.
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>1.05.00</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+      <issue category="apparentIssue">
+         <identifier>ESCAN00095356</identifier>
+         <package>FblLib_Mem</package>
+         <subpackage>Implementation</subpackage>
+         <severity>Low</severity>
+         <issueClass>Issue in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Stream output: Erroneous data overflow indicated</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+Download reports an error, typically NRC 0x71 (TransferDataSuspended).
+In case of a UDS download sequence this negative response occurs on a TransferData request.
+
+
+When does this happen:
+-------------------------------------------------------------------
+When downloading data which is passed to the stream output processing, e.g. delta download.
+Additionally the input length has to be larger than the announced output length, which is expected to be produced by the processing operation.
+
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+When all of the following applies:
+
+- Additional run-time checks are enabled (FBL_ENABLE_SYSTEM_CHECK)
+- Stream output processing is enabled (FBL_MEM_ENABLE_STREAM_OUTPUT)
+- Processed data length is not enabled (FBL_DISABLE_PROCESSED_DATA_LENGTH)</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+Any of the following workarounds can be applied:
+
+- Disable additional run-time checks (FBL_DISABLE_SYSTEM_CHECK)
+- Do not download delta images which are larger than the actual target image
+
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>3.00.00</firstAffectedVersion>
+         <versionsFixed>4.02.01</versionsFixed>
+      </issue>
+      <issue category="apparentIssue">
+         <identifier>ESCAN00086590</identifier>
+         <package>SysService_WrapperNv</package>
+         <subpackage>GenTool_Geny</subpackage>
+         <severity>Low</severity>
+         <issueClass>Issue in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Obsolete generated code in WrapNv_cfg.c does not compile</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+Obsolete generated code in WrapNv_cfg.c does not compile, file should no longer be generated.
+
+
+When does this happen:
+-------------------------------------------------------------------
+Always and immediately
+
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+Any configuration</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+The C file is not needed. Do not compile this file and try to link it to your bootloader.
+
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>1.00.00</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+      <issue category="apparentIssue">
+         <identifier>ESCAN00095625</identifier>
+         <package>GenTool_GenyVcfgNameDecorator</package>
+         <subpackage>GenTool_Geny</subpackage>
+         <severity>Low</severity>
+         <issueClass>Issue in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>External Generator errors "BitOrder could not be resolved"</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+External Generators throw an error like: "BitOrder could not be resolved".
+
+
+When does this happen:
+-------------------------------------------------------------------
+During generation time with external generators like e.g. DrvEep_XXspi01Asr
+
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+In all configurations with external generators that needs the BoardBitOrder Parameter.</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+Create or patch the Board_preo.arxml (within &lt;SIP&gt;\external\Generators\Components\_Boards\Canoeemu\bswmd) and add a preconfiguration of the parameter BoardBitOrder with the according value for your platform.
+
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>2.16.00</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+      <issue category="apparentIssue">
+         <identifier>ESCAN00094695</identifier>
+         <package>FblLib_Mem</package>
+         <subpackage>Implementation</subpackage>
+         <severity>Low</severity>
+         <issueClass>Issue in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Array gRemainderBuffer is not explicit aligned</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+The program flow hit an assertion in FlashDriver_WriteToFlash() (fbl_flio.c). This assertion asserts the correct alignment of the write buffer.
+
+
+When does this happen:
+-------------------------------------------------------------------
+This happens for example whenever a file with a non-aligned length is to be programmed.
+
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+Always in the case the compiler/ linker does not align objects the used flash memory.</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+Align variable gRemainderBuffer from fbl_mem.c to a 32-bit boundary.
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>1.00.00</firstAffectedVersion>
+         <versionsFixed>4.02.01</versionsFixed>
+      </issue>
+      <issue category="apparentIssue">
+         <identifier>ESCAN00090391</identifier>
+         <package>FblTool_Hexeditor_Hexview</package>
+         <subpackage>Application_Exe</subpackage>
+         <severity>Low</severity>
+         <issueClass>Issue in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>GM: Calibration header cannot be generated in a way, so that all data bytes can be used</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+Wrong calibration headers are generated.
+
+GM SLP5, SLP6     (XML based header generation): 
+* The calibration file header  is placed before the expeced (and configured) location, if not more than really necessary bytes (0x14) are left empty.
+   
+GM SLP4               (BAT - file  based header generation): 
+* The calibration header overwrites existing data bytes, if not more than really necessary bytes (0x14) are left empty.
+
+When does this happen:
+-------------------------------------------------------------------
+At calibration file header generation time.
+
+Hexview alignment value (through parameter /AD:XX) is chosen according to the (flash) memories write segment size (ALIGN_SEG_SIZE).
+
+This does not happen, if the amount of bytes left empty is high enough. The number is high enough, if it is at minimum the smallest multiple of ALIGN_SEG_SIZE greater equal 14.
+If less is left empty, the issue occurs. 
+
+E.g. the issue occurs:
+* if SEG_SIZE = 4 is  and only  14 bytes are left empty (16 bytes need to be left empty).
+* if SEG_SIZE = 64 is  and only 14 bytes are left empty (64 bytes need to be left empty).
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+If the memories write segment size and thus required alignment value is larger 2 (for internal flash this is e.g. flashdrv.h: FLASH_SEGMENT_SIZE).</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+Leave at minimum the smallest multiple of ALIGN_SEG_SIZE (compare issue description) greater equal 14 empty at start of file.
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products. 
+
+The resolution allows to do correct fill using /GMAL=X feature. However, data bytes are not possible to be correctly aligned.</resolutionDescription>
+         <firstAffectedVersion>1.05.00</firstAffectedVersion>
+         <versionsFixed>1.11.00</versionsFixed>
+      </issue>
+      <issue category="apparentIssue">
+         <identifier>ESCAN00095072</identifier>
+         <package>FblKbApi</package>
+         <subpackage>Implementation</subpackage>
+         <severity>Low</severity>
+         <issueClass>Issue in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>ApplFblSetModulePresence() Cannot write presence pattern to multiple memory devices with different erased values</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+ApplFblSetModulePresence() errantly returns kFblFailed when it has written a valid presence pattern. Download will be halted.
+
+
+When does this happen:
+-------------------------------------------------------------------
+During the validation of a block of memory down loaded to secondary device type with a different erased value than primary memory
+
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+FBL_ENABLE_PRESENCE_PATTERN
+  AND
+FBL_ENABLE_MULTIPLE_MEM_DEVICES
+ AND
+FBL_FLASH_DELETED is a different value than the deleted value of the secondary device driver.</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+ApplFblSetModulePresence() has to be adapted according to the erased code.
+
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>1.00.00</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+      <issue category="apparentIssue">
+         <identifier>ESCAN00078508</identifier>
+         <package>FblDrvFlash_Rh850Rv40His</package>
+         <subpackage>Impl_Base</subpackage>
+         <severity>Low</severity>
+         <issueClass>Issue in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>[depends on derivative] Illegal flash block table configuration cause unintended block erase</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+If the code flash contains gaps where no flash exists and the user configure a flash block in this area, the flash driver will erase the next valid flash block (first block with start address bigger than the illegal configured block).
+
+
+When does this happen:
+-------------------------------------------------------------------
+Always and immediately
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+all configurations, but not all derivatives
+
+Note: The gap between user area and extended user area is not relevant. Until now, no known derivative is affected by this issue!</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+Well configured flash block table, which corresponds to the real flash block structure.
+
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>0.90.00</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+      <issue category="apparentIssue">
+         <identifier>ESCAN00090094</identifier>
+         <package>FblDrvCan_Rh850RscanCrx</package>
+         <subpackage>Implementation</subpackage>
+         <severity>Low</severity>
+         <issueClass>Issue in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>FblCanWakeup() does not allow to enable Can clock again</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+After call to FblCanSleep and wakup call to FblCanWakeUp, no CAN communicaton is possible any more.
+
+When does this happen:
+-------------------------------------------------------------------
+When waking up again via FblCanWakeUp.
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+Configurations that support Can low power mode (FBL_ENABLE_SLEEPMODE defined).</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+1. Replace calls to FblCanWakeUp() by calls to ApplFblCanWakeUp() in user callback context.
+2. Add code to ApplFblCanWakeUp()  to wake up again:
+
+void ApplFblCanWakeUp( void )
+{
+   /* Clear error flags */
+   Can-&gt;ChCtrl[kFblCanChannel].EF &amp;= FblInvert32Bit(kCanEfMask);
+
+   /* Clear rx full pending buffers 0 - 31*/
+   Can-&gt;CRBRCF[0] = 0;
+
+   /* Set channel reset mode (currently in stop or reset mode) */
+   CanLL_ModeReq_Phys(kFblCanChannel,kCanResetMode);
+   while ((!CanLL_ModeCheck_Phys(kFblCanChannel,kCanResetMode)))
+   {
+      ;
+   }
+
+   /* Switch to operation mode (and wait till it is reached) */
+   CanLL_ModeReq_Phys(kFblCanChannel,kCanOperationMode);
+
+   while (!CanLL_ModeCheck_Phys(kFblCanChannel,kCanOperationModeCheck))
+   {
+      ;
+   }
+}
+
+3. Define these macros so that they are available within ApplFblCanWakeUp():
+
+  /**&lt; Requests a on a physical channel */
+#define CanLL_ModeReq_Phys(pch,mode)   (Can-&gt;ChCtrl[pch].CR = ((Can-&gt;ChCtrl[pch].CR &amp; kCanModeMask) | (mode)))
+#define CanLL_ModeCheck_Phys(pch,mode)   ((Can-&gt;ChCtrl[pch].SR &amp; kCanModeBits) == ((mode) &amp; kCanModeBits))
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>1.02.00</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+      <issue category="apparentIssue">
+         <identifier>ESCAN00095107</identifier>
+         <package>FblTool_Hexeditor_Hexview</package>
+         <subpackage>Application_Exe</subpackage>
+         <severity>Low</severity>
+         <issueClass>Issue in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Compile error of generated C-structure</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+on C-File export Hexview generates
+
+typedef struct _tFblUpdateBlkInfo
+{
+   FBL_ADDR_TYPE     blockAddress;
+   FBL_MEMSIZE_TYPE  blockLength;
+   V_MEMROM0 V_MEMROM1  vuint8 V_MEMROM2 * V_MEMROM1 V_MEMROM2 blockSource;
+} tFblUpdateBlkInfo;
+
+this may lead to compiler errors on platforms where V_MEMROM2 is defined to "const" because a const inside a struct is not allowed.
+
+When does this happen:
+-------------------------------------------------------------------
+on C-file export
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+if  V_MEMROM2 is defined to "const" and C-File export is used</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+
+replace
+   V_MEMROM0 V_MEMROM1  vuint8 V_MEMROM2 * V_MEMROM1 V_MEMROM2 blockSource;
+by
+   V_MEMROM1 vuint8 V_MEMROM2 V_MEMROM3 * blockSource;
+manually
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>1.05.00</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+      <issue category="compilerWarning">
+         <identifier>ESCAN00090114</identifier>
+         <package>SysService_CryptoCv</package>
+         <subpackage>Impl_actCLib</subpackage>
+         <severity>Low</severity>
+         <issueClass>Warning in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Compiler Warning: Assignment in condition</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+Compiling file: ../../../BSW/SecMod/actBNReduce.c
+../../../BSW/SecMod\actBNReduce.c(117): WARNING C5909: Assignment in condition
+Compiling file: ../../../BSW/SecMod/actBigNum.c
+../../../BSW/SecMod\actBigNum.c(234): WARNING C5909: Assignment in condition
+
+
+When does this happen:
+-------------------------------------------------------------------
+The warning is issued by the compiler during compilation of the code in case the configuration is as described below.   
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+in all configurations</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+No workaround available.
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>1.00.00</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+      <issue category="compilerWarning">
+         <identifier>ESCAN00089241</identifier>
+         <package>SysService_CryptoCv</package>
+         <subpackage>Impl_actCLib</subpackage>
+         <severity>Low</severity>
+         <issueClass>Warning in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Compiler warning: multiple warnings</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+- Compiler warns for possible loss of data: Check if cast is missing and if there is really a data loss due to an implicit/explicit cast on the target platform
+- Compiler warns for ambiguous code, parentheses recommended.
+
+
+When does this happen:
+-------------------------------------------------------------------
+The warning is issued by the compiler during compilation of the code in case the configuration is as described below.   
+
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+Always.</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+No workaround available.
+
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>1.00.00</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+      <issue category="compilerWarning">
+         <identifier>ESCAN00093014</identifier>
+         <package>FblDiag_SecHdr_Gm</package>
+         <subpackage>Implementation</subpackage>
+         <severity>Low</severity>
+         <issueClass>Warning in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Compiler warning: ctc W560: possible truncation at implicit conversion to type "unsigned short int"</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+Compiler warning: ctc W560: possible truncation at implicit conversion to type "unsigned short int"
+
+When does this happen:
+-------------------------------------------------------------------
+The warning is issued by the compiler during compilation of the code in case the configuration is as described below.   
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+in every configuration</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+No workaround available.
+
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>2.00.00</firstAffectedVersion>
+         <versionsFixed>3.03.00</versionsFixed>
+      </issue>
+      <issue category="compilerWarning">
+         <identifier>ESCAN00094172</identifier>
+         <package>SysService_WrapperNv</package>
+         <subpackage>Implementation</subpackage>
+         <severity>Low</severity>
+         <issueClass>Warning in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Compiler warning: undefined preprocessor define</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+Compiler warns for an undefined preprocessor define (FEE_FSS_CONTROL_API).
+
+
+When does this happen:
+-------------------------------------------------------------------
+The warning is issued by the compiler during compilation of the code in case the configuration is as described below.   
+
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+In projects were not the Vector Autosar FEE is used.</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+Add the following line to the config file (WrapNv_Cfg.h):
+#define FEE_FSS_CONTROL_API          STD_OFF
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>2.00.00</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+      <issue category="compilerWarning">
+         <identifier>ESCAN00083332</identifier>
+         <package>SysService_SecModHis</package>
+         <subpackage>GenTool_Geny</subpackage>
+         <severity>Low</severity>
+         <issueClass>Warning in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Compiler warning: Wrong spelling of include SecM_Inc.h in SecM_Par.*</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+Compiler warns for a differently spelled file name.
+
+When does this happen:
+-------------------------------------------------------------------
+The warning is issued by the compiler during compilation of the code in case the configuration is as described below.   
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+Any configuration that checks the case of includes.</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+If your operating system has case sensitive file names you can create a SecM_inc.h which includes a SecM_Inc.h.
+
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>1.03.00</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+      <issue category="compilerWarning">
+         <identifier>ESCAN00089424</identifier>
+         <package>SysService_CryptoCv</package>
+         <subpackage>Impl_ESLib</subpackage>
+         <severity>Low</severity>
+         <issueClass>Warning in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Compiler warning: dead assignment to "returnValue" eliminated</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+Compiling file: ../../../BSW/SecMod/ESLib_RSA_V15_Ver_SHA256.c
+
+ctc W588: ["../../../BSW/SecMod/ESLib_RSA_V15_Ver_SHA256.c" 193/17] dead assignment to "returnValue" eliminated
+ctc W588: ["../../../BSW/SecMod/ESLib_RSA_V15_Ver_SHA256.c" 358/17] dead assignment to "returnValue" eliminated
+
+When does this happen:
+-------------------------------------------------------------------
+The warning is issued by the compiler during compilation of the code in case the configuration is as described below.   
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+- Signature verification using RSASSA-PKCS1-v1_5 is used</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+No workaround available.
+
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>1.00.00</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+      <issue category="compilerWarning">
+         <identifier>ESCAN00090113</identifier>
+         <package>SysService_CryptoCv</package>
+         <subpackage>Impl_ESLib</subpackage>
+         <severity>Low</severity>
+         <issueClass>Warning in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Compiler Warning: Result of function-call is ignored</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+Compiling file: ../../../BSW/SecMod/ESLib_SHA256.c
+../../../BSW/SecMod\ESLib_SHA256.c(71): WARNING C1420: Result of function-call is ignored
+../../../BSW/SecMod\ESLib_SHA256.c(180): WARNING C1420: Result of function-call is ignored
+
+
+When does this happen:
+-------------------------------------------------------------------
+The warning is issued by the compiler during compilation of the code in case the configuration is as described below.   
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+in all configurations</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+No workaround available.
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>1.00.00</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+      <issue category="compilerWarning">
+         <identifier>ESCAN00089425</identifier>
+         <package>SysService_CryptoCv</package>
+         <subpackage>Impl_ESLib</subpackage>
+         <severity>Low</severity>
+         <issueClass>Warning in a released product</issueClass>
+         <safetyRelevant>false</safetyRelevant>
+         <headline>Compiler warning: missing braces around initializer</headline>
+         <problemDescription>What happens (symptoms):
+-------------------------------------------------------------------
+Compiling file: ../../../BSW/SecMod/ESLib_version.c
+ctc W542: ["../../../BSW/SecMod/ESLib_version.c" 73/4] missing braces around initializer
+
+When does this happen:
+-------------------------------------------------------------------
+The warning is issued by the compiler during compilation of the code in case the configuration is as described below.   
+
+In which configuration does this happen:
+-------------------------------------------------------------------
+In all configurations.</problemDescription>
+         <resolutionDescription>Workaround:
+-------------------------------------------------------------------
+Since ESLib_version.c is only used for component testing, it can be excluded from the build for integration.
+
+
+Resolution:
+-------------------------------------------------------------------
+The described issue is corrected by modification of all affected work-products.</resolutionDescription>
+         <firstAffectedVersion>1.01.01</firstAffectedVersion>
+         <versionsFixed/>
+      </issue>
+   </issues>
+</issueReport>
